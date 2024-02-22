@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:time_picker_with_timezone/time_picker_with_timezone.dart';
 
 void main() => runApp(const MyApp());
 
@@ -33,7 +34,7 @@ class ExampleWidget extends StatelessWidget {
       body: Center(
         child: ElevatedButton(
           onPressed: () {
-            showTimePicker(
+            showCustomTimePicker(
               context: context,
               initialTime: TimeOfDay.now(),
             );

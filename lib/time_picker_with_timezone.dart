@@ -1,5 +1,3 @@
-library time_picker_with_timezone;
-
 // Copyright 2014 The Flutter Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -11,9 +9,6 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
-
-// Examples can assume:
-// late BuildContext context;
 
 const Duration _kDialogSizeAnimationDuration = Duration(milliseconds: 200);
 const Duration _kDialAnimateDuration = Duration(milliseconds: 200);
@@ -217,6 +212,28 @@ class _TimePickerHeader extends StatelessWidget {
       alwaysUse24HourFormat: _TimePickerModel.use24HourFormatOf(context),
     );
 
+    // final titleAndTimeZone = Row(
+    //   children: [
+    //     Text(
+    //       helpText,
+    //       style:
+    //           _TimePickerModel.themeOf(context).helpTextStyle ?? _TimePickerModel.defaultThemeOf(context).helpTextStyle,
+    //     ),
+    //     const Spacer(),
+    //     //时区设置
+    //     TextButton(
+    //       onPressed: () {},
+    //       child: const Row(
+    //         mainAxisSize: MainAxisSize.min,
+    //         children: [
+    //           Text("固定时区"),
+    //           Icon(Symbols.keyboard_arrow_down_rounded, size: 16),
+    //         ],
+    //       ),
+    //     ).transform(transform: Matrix4.translationValues(16.0, 0.0, 0.0)),
+    //   ],
+    // );
+
     final _HourDialType hourDialType = _TimePickerModel.hourDialTypeOf(context);
     switch (_TimePickerModel.orientationOf(context)) {
       case Orientation.portrait:
@@ -224,17 +241,16 @@ class _TimePickerHeader extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Padding(
-              padding: EdgeInsetsDirectional.only(bottom: _TimePickerModel.useMaterial3Of(context) ? 20 : 24),
-              child: Text(
-                helpText,
-                style: _TimePickerModel.themeOf(context).helpTextStyle ??
-                    _TimePickerModel.defaultThemeOf(context).helpTextStyle,
-              ),
+              padding: EdgeInsetsDirectional.only(bottom: _TimePickerModel.useMaterial3Of(context) ? 0 : 4),
+              child: _TitleAndTimeZone(helpText: helpText),
             ),
             Row(
               children: <Widget>[
-                if (hourDialType == _HourDialType.twelveHour && timeOfDayFormat == TimeOfDayFormat.a_space_h_colon_mm)
+                if (hourDialType == _HourDialType.twelveHour &&
+                    timeOfDayFormat == TimeOfDayFormat.a_space_h_colon_mm) ...<Widget>[
                   const _DayPeriodControl(),
+                  const SizedBox(width: 12),
+                ],
                 Expanded(
                   child: Row(
                     // Hour/minutes should not change positions in RTL locales.
@@ -260,11 +276,7 @@ class _TimePickerHeader extends StatelessWidget {
           width: _kTimePickerHeaderLandscapeWidth,
           child: Stack(
             children: <Widget>[
-              Text(
-                helpText,
-                style: _TimePickerModel.themeOf(context).helpTextStyle ??
-                    _TimePickerModel.defaultThemeOf(context).helpTextStyle,
-              ),
+              _TitleAndTimeZone(helpText: helpText),
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -1773,17 +1785,16 @@ class _TimePickerInputState extends State<_TimePickerInput> with RestorationMixi
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
+          //title and timezone
           Padding(
-            padding: EdgeInsetsDirectional.only(bottom: _TimePickerModel.useMaterial3Of(context) ? 20 : 24),
-            child: Text(
-              widget.helpText,
-              style: _TimePickerModel.themeOf(context).helpTextStyle ??
-                  _TimePickerModel.defaultThemeOf(context).helpTextStyle,
-            ),
+            padding: EdgeInsetsDirectional.only(bottom: _TimePickerModel.useMaterial3Of(context) ? 0 : 4),
+            child: _TitleAndTimeZone(helpText: widget.helpText),
           ),
+          //hour and minute textField
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
+              //am/pm
               if (!use24HourDials && timeOfDayFormat == TimeOfDayFormat.a_space_h_colon_mm) ...<Widget>[
                 Padding(
                   padding: const EdgeInsetsDirectional.only(end: 12),
@@ -1859,6 +1870,7 @@ class _TimePickerInputState extends State<_TimePickerInput> with RestorationMixi
                   ],
                 ),
               ),
+              //am/pm
               if (!use24HourDials && timeOfDayFormat != TimeOfDayFormat.a_space_h_colon_mm) ...<Widget>[
                 Padding(
                   padding: const EdgeInsetsDirectional.only(start: 12),
@@ -1874,6 +1886,43 @@ class _TimePickerInputState extends State<_TimePickerInput> with RestorationMixi
             )
           else
             const SizedBox(height: 2),
+        ],
+      ),
+    );
+  }
+}
+
+class _TitleAndTimeZone extends StatelessWidget {
+  const _TitleAndTimeZone({super.key, required this.helpText});
+
+  final String helpText;
+
+  @override
+  Widget build(BuildContext context) {
+    return Transform(
+      transform: Matrix4.translationValues(0.0, -8.0, 0.0),
+      child: Row(
+        children: [
+          Text(
+            helpText,
+            style: _TimePickerModel.themeOf(context).helpTextStyle ??
+                _TimePickerModel.defaultThemeOf(context).helpTextStyle,
+          ),
+          const Spacer(),
+          //时区设置
+          Transform(
+            transform: Matrix4.translationValues(16.0, 0.0, 0.0),
+            child: TextButton(
+              onPressed: () {},
+              child: const Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text("固定时区"),
+                  Icon(Icons.keyboard_arrow_down_rounded, size: 16),
+                ],
+              ),
+            ),
+          ),
         ],
       ),
     );
@@ -2404,6 +2453,7 @@ class _TimePickerDialogState extends State<TimePickerDialog> with RestorationMix
     final Color entryModeIconColor = pickerTheme.entryModeIconColor ?? defaultTheme.entryModeIconColor;
     final MaterialLocalizations localizations = MaterialLocalizations.of(context);
 
+    //确定按键
     final Widget actions = Padding(
       padding: EdgeInsetsDirectional.only(start: theme.useMaterial3 ? 0 : 4),
       child: Row(
@@ -3017,7 +3067,7 @@ class _TimePickerState extends State<_TimePicker> with RestorationMixin {
 ///   typography, and shape of the time picker.
 /// * [DisplayFeatureSubScreen], which documents the specifics of how
 ///   [DisplayFeature]s can split the screen into sub-screens.
-Future<TimeOfDay?> showTimePicker({
+Future<TimeOfDay?> showCustomTimePicker({
   required BuildContext context,
   required TimeOfDay initialTime,
   TransitionBuilder? builder,
