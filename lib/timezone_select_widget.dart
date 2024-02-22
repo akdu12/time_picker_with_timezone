@@ -34,7 +34,7 @@ class _TimezoneSelectWidgetState extends State<TimezoneSelectWidget> {
   @override
   void dispose() {
     widget.searchController.removeListener(searchListener);
-    widget.searchController.dispose();
+    // widget.searchController.dispose();
     super.dispose();
   }
 

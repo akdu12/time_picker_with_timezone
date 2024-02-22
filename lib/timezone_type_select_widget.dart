@@ -13,10 +13,15 @@ class TimezoneTypeSelectWidget extends StatefulWidget {
 
 class _TimezoneTypeSelectWidgetState extends State<TimezoneTypeSelectWidget> {
   final visualDensity = const VisualDensity(horizontal: -4, vertical: 0);
+  final contentPadding = const EdgeInsets.symmetric(horizontal: 14);
 
   final searchController = TextEditingController();
 
-
+  @override
+  void dispose() {
+    searchController.dispose();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     // print('TimezoneTypeSelectWidget build');
@@ -32,8 +37,7 @@ class _TimezoneTypeSelectWidgetState extends State<TimezoneTypeSelectWidget> {
             value: 0,
             groupValue: 0,
             visualDensity: visualDensity,
-            contentPadding: EdgeInsets.zero,
-            selected: true,
+            contentPadding: contentPadding,
             onChanged: (int? value) {
               setState(() {
                 // _selectedOption = value!;
@@ -49,8 +53,8 @@ class _TimezoneTypeSelectWidgetState extends State<TimezoneTypeSelectWidget> {
             value: 1,
             groupValue: 0,
             visualDensity: visualDensity,
-            contentPadding: EdgeInsets.zero,
-            secondary: Icon(Icons.keyboard_arrow_right_rounded),
+            contentPadding: contentPadding,
+            secondary: const Icon(Icons.keyboard_arrow_right_rounded),
             onChanged: (int? value) {
               // setState(() {
               //   _selectedOption = value!;

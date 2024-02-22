@@ -11,8 +11,6 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:time_picker_with_timezone/timezone_type_select_widget.dart';
 
-
-
 const Duration _kDialogSizeAnimationDuration = Duration(milliseconds: 200);
 const Duration _kDialAnimateDuration = Duration(milliseconds: 200);
 const double _kTwoPi = 2 * math.pi;
@@ -1942,7 +1940,20 @@ class _TitleAndTimeZone extends StatelessWidget {
                   context: context,
                   builder: (BuildContext context) {
                     return AlertDialog(
-                      title: Text('时区设置'),
+                      insetPadding: const EdgeInsets.symmetric(horizontal: 18, vertical: 24),
+                      titlePadding: const EdgeInsets.only(top: 16, left: 24, bottom: 0),
+                      contentPadding: EdgeInsets.zero,
+                      actionsPadding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
+                      title: Row(
+                        children: [
+                          const Text('时区设置'),
+                          // const SizedBox(width: 8),
+                          IconButton(
+                            icon: const Icon(Icons.help_outline_rounded),
+                            onPressed: () {},
+                          ),
+                        ],
+                      ),
                       content: TimezoneTypeSelectWidget(
                         initType: 0,
                         initTimezone: '',
