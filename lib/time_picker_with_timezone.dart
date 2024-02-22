@@ -9,6 +9,9 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
+import 'package:time_picker_with_timezone/timezone_type_select_widget.dart';
+
+
 
 const Duration _kDialogSizeAnimationDuration = Duration(milliseconds: 200);
 const Duration _kDialAnimateDuration = Duration(milliseconds: 200);
@@ -1909,11 +1912,70 @@ class _TitleAndTimeZone extends StatelessWidget {
                 _TimePickerModel.defaultThemeOf(context).helpTextStyle,
           ),
           const Spacer(),
+
+          // TimezoneDropdown(
+          //   onTimezoneSelected: (timeZone) => print(timeZone),
+          //   selectHint: 'Select Hint',
+          //   searchHint: 'searchHint',
+          // ),
+
+          // TimezoneDropdown(
+          //   selectHint: 'Select Timezone',
+          //   searchHint: 'Search Timezones...',
+          //   selectedTimezone: null,
+          //   onTimezoneSelected: (timeZone) => print(timeZone),
+          // ),
+
           //时区设置
           Transform(
             transform: Matrix4.translationValues(16.0, 0.0, 0.0),
             child: TextButton(
-              onPressed: () {},
+              onPressed: () async {
+                // final String currentTimeZone = await FlutterNativeTimezone.getLocalTimezone();
+                // print("flutter_native_timezone:$currentTimeZone");
+                // final String currentTimeZone2 = await FlutterTimezone.getLocalTimezone();
+                // print("flutter_timezone:$currentTimeZone2");
+
+                // final List<int> selectedOption = [0, 1];
+
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: Text('时区设置'),
+                      content: TimezoneTypeSelectWidget(
+                        initType: 0,
+                        initTimezone: '',
+                      ),
+                      actions: <Widget>[
+                        TextButton(
+                          child: Text('取消'),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                            // print('Selected option: $selectedOption');
+                          },
+                        ),
+                        //   TextButton(
+                        //     child: Text('确定'),
+                        //     onPressed: () {
+                        //       Navigator.of(context).pop();
+                        //       print('Selected option: $selectedOption');
+                        //     },
+                        //   ),
+                      ],
+                    );
+                  },
+                );
+
+                // tz.initializeTimeZones();
+                //
+                // tz.timeZoneDatabase.locations.forEach((name, location) {
+                //   final offsetInSeconds = location.currentTimeZone.offset ~/ 1000;
+                //   final offsetInHours = offsetInSeconds ~/ 3600;
+                //   print('$name, Offset: $offsetInHours hours isDst:${location.currentTimeZone.isDst} abb:${location
+                //       .currentTimeZone.abbreviation}');
+                // });
+              },
               child: const Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
