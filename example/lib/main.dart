@@ -26,6 +26,9 @@ class MyApp extends StatelessWidget {
 }
 
 class ExampleWidget extends StatelessWidget {
+
+
+
   const ExampleWidget({super.key});
 
   @override
@@ -37,7 +40,13 @@ class ExampleWidget extends StatelessWidget {
             showCustomTimePicker(
               context: context,
               initialTime: TimeOfDay.now(),
-            );
+              initTimezoneType: 1,
+              initTimezone: "Asia/Shanghai",
+              initOffsetInHours: 0,
+              timezoneHelpPressed: () {
+                print('timezoneHelpPressed');
+              },
+            ).then((value) => null);
           },
           child: const Text("Test"),
         ),

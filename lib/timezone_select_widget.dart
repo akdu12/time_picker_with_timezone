@@ -1,14 +1,28 @@
+// Copyright 2024 Charles Lee. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
 import 'package:flutter/material.dart';
+import 'package:time_picker_with_timezone/timezone_util.dart';
 
 // import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/data/latest_10y.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
 class TimezoneSelectWidget extends StatefulWidget {
-  const TimezoneSelectWidget({super.key, required this.initTimezone, required this.searchController});
+  const TimezoneSelectWidget({
+    required this.searchController,
+    super.key,
+    this.initTimezone,
+    this.initOffsetInHours,
+    this.onTimezoneSelected,
+  });
 
-  final String initTimezone;
   final TextEditingController searchController;
+  final String? initTimezone;
+  final int? initOffsetInHours;
+
+  final Function(String timezone, int timeOffset)? onTimezoneSelected;
 
   @override
   State<TimezoneSelectWidget> createState() => _TimezoneSelectWidgetState();
@@ -34,7 +48,6 @@ class _TimezoneSelectWidgetState extends State<TimezoneSelectWidget> {
   @override
   void dispose() {
     widget.searchController.removeListener(searchListener);
-    // widget.searchController.dispose();
     super.dispose();
   }
 
@@ -43,8 +56,7 @@ class _TimezoneSelectWidgetState extends State<TimezoneSelectWidget> {
     final List<Widget> timezoneListWidget = [];
 
     tz.timeZoneDatabase.locations.forEach((name, location) {
-
-      if(searchText.isNotEmpty && !name.toLowerCase().contains(searchText.toLowerCase())) {
+      if (searchText.isNotEmpty && !name.toLowerCase().contains(searchText.toLowerCase())) {
         return;
       }
 
@@ -53,35 +65,22 @@ class _TimezoneSelectWidgetState extends State<TimezoneSelectWidget> {
       final isDst = location.currentTimeZone.isDst;
       final abbreviation = location.currentTimeZone.abbreviation;
 
-      String offsetStr = "";
-      if (offsetInHours >= 10) {
-        offsetStr += "+$offsetInHours";
-      } else if (offsetInHours >= 0) {
-        offsetStr = "+0$offsetInHours";
-      } else if (offsetInHours > -10) {
-        offsetStr = "-0${-offsetInHours}";
-      } else {
-        offsetStr = "$offsetInHours";
-      }
-
-      offsetStr += ":00";
+      final offsetStr = TimezoneUtil.timeOffset2String(offsetInHours);
 
       timezoneListWidget.add(
         RadioListTile<String>(
-          // title: Text("$name, UTC$offsetStr${isDst ? " DST" : ""}"),
           title: Text("$abbreviation, UTC$offsetStr${isDst ? " DST" : ""}"),
           subtitle: Text(
             name,
             style: const TextStyle(fontSize: 12),
           ),
           value: name,
-          groupValue: "",
+          groupValue: widget.initTimezone,
           visualDensity: visualDensity,
           contentPadding: const EdgeInsets.symmetric(horizontal: 10),
           onChanged: (String? value) {
-            // setState(() {
-            //   // _selectedOption = value!;
-            // });
+            widget.onTimezoneSelected?.call(value!, offsetInHours);
+            // print("TimezoneSelectWidget build onChanged:${value}");
           },
         ),
       );
