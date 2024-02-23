@@ -44,8 +44,8 @@ class TimezoneTypeSelectWidget extends StatefulWidget {
 }
 
 class _TimezoneTypeSelectWidgetState extends State<TimezoneTypeSelectWidget> {
-  final visualDensity = const VisualDensity(horizontal: -4, vertical: 0);
-  final contentPadding = const EdgeInsets.symmetric(horizontal: 14);
+  final visualDensity = const VisualDensity(horizontal: -2, vertical: 0);
+  final contentPadding = const EdgeInsets.only(left: 20, right: 16);
   final titleTextStyle = const TextStyle(fontSize: 12);
 
   final searchController = TextEditingController();
@@ -64,22 +64,25 @@ class _TimezoneTypeSelectWidgetState extends State<TimezoneTypeSelectWidget> {
     return SingleChildScrollView(
       child: ListBody(
         children: <Widget>[
-          RadioListTile<int>(
+          ListTile(
             title: Text(widget.fixedTimeTitle ?? '固定时间'),
             subtitle: Text(
               widget.fixedTimeSubTitle ?? '时间不随时区变化',
               style: titleTextStyle,
             ),
-            value: 0,
-            groupValue: widget.initTimezoneType,
+            selected: widget.initTimezoneType == 0,
             visualDensity: visualDensity,
             contentPadding: contentPadding,
-            onChanged: (int? value) {
-              widget.onTimezoneTypeSelected?.call(value!, "", 0);
+            leading: Visibility.maintain(
+              visible: widget.initTimezoneType == 0,
+              child: const Icon(Icons.done_rounded),
+            ),
+            onTap: () {
+              widget.onTimezoneTypeSelected?.call(0, "", 0);
               Navigator.of(context).pop();
             },
           ),
-          RadioListTile<int>(
+          ListTile(
             title: Text(widget.timezoneTimeTitle ?? '时区时间'),
             subtitle: widget.initTimezone != null && widget.initTimezone!.isNotEmpty && widget.initOffsetInHours != null
                 ? Text(
@@ -87,12 +90,14 @@ class _TimezoneTypeSelectWidgetState extends State<TimezoneTypeSelectWidget> {
                     style: titleTextStyle,
                   )
                 : null,
-            value: 1,
-            groupValue: widget.initTimezoneType,
+            selected: widget.initTimezoneType == 1,
             visualDensity: visualDensity,
             contentPadding: contentPadding,
-            secondary: const Icon(Icons.keyboard_arrow_right_rounded),
-            onChanged: (int? value) {
+            leading: Visibility.maintain(
+              visible: widget.initTimezoneType == 1,
+              child: const Icon(Icons.done_rounded),
+            ),
+            onTap: () {
               showDialog(
                 context: context,
                 barrierColor: Colors.transparent, //多个barrier叠加后背景太深，不好看
@@ -130,7 +135,7 @@ class _TimezoneTypeSelectWidgetState extends State<TimezoneTypeSelectWidget> {
                       initTimezone: widget.initTimezone,
                       initOffsetInHours: widget.initOffsetInHours,
                       onTimezoneSelected: (String timezone, int offsetInHours) {
-                        widget.onTimezoneTypeSelected?.call(value!, timezone, offsetInHours);
+                        widget.onTimezoneTypeSelected?.call(1, timezone, offsetInHours);
                         Navigator.of(context).pop();
                         //连续弹出两次到时间选择页面
                         Navigator.of(context).pop();
@@ -155,7 +160,9 @@ class _TimezoneTypeSelectWidgetState extends State<TimezoneTypeSelectWidget> {
                 },
               );
             },
+            trailing: const Icon(Icons.keyboard_arrow_right_rounded),
           ),
+
         ],
       ),
     );
