@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:timezone/timezone.dart';
 
 class TimeOfDayAndTimezone {
   const TimeOfDayAndTimezone({
@@ -7,9 +8,11 @@ class TimeOfDayAndTimezone {
     required this.timeOfDay,
     required this.timezone,
   });
-
   final TimeOfDay timeOfDay;
-  final String? timezone;
+  final TimeZone? timezone;
   final int? offsetInHours;
   final int type;
+
+  // final TimeZone? timeZone;
 }
+

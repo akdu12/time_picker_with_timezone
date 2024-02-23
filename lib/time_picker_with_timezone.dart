@@ -2056,9 +2056,14 @@ class _TitleAndTimezoneState extends State<_TitleAndTimezone> {
                           children: [
                             Text(widget.timezoneTypeTitle ?? '时区设置'),
                             // const SizedBox(width: 8),
-                            IconButton(
-                              icon: widget.timezoneHelpIcon ?? const Icon(Icons.help_outline_rounded),
-                              onPressed: () {},
+
+                            //不显示时也需要位置占位，保持UI一致性
+                            Visibility.maintain(
+                              visible: widget.timezoneHelpIcon != null,
+                              child: IconButton(
+                                icon: widget.timezoneHelpIcon ?? const Icon(Icons.help_outline_rounded),
+                                onPressed: widget.timezoneHelpPressed,
+                              ),
                             ),
                           ],
                         ),

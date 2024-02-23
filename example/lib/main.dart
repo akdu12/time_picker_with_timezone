@@ -26,9 +26,6 @@ class MyApp extends StatelessWidget {
 }
 
 class ExampleWidget extends StatelessWidget {
-
-
-
   const ExampleWidget({super.key});
 
   @override
@@ -46,7 +43,9 @@ class ExampleWidget extends StatelessWidget {
               timezoneHelpPressed: () {
                 print('timezoneHelpPressed');
               },
-            ).then((value) => null);
+            ).then((value) {
+              print(value);
+            });
           },
           child: const Text("Test"),
         ),
