@@ -68,19 +68,21 @@ class _TimezoneSelectWidgetState extends State<TimezoneSelectWidget> {
       final offsetStr = TimezoneUtil.timeOffset2String(offsetInHours);
 
       timezoneListWidget.add(
-        RadioListTile<String>(
+        ListTile(
           title: Text("$abbreviation, UTC$offsetStr${isDst ? " DST" : ""}"),
           subtitle: Text(
             name,
             style: const TextStyle(fontSize: 12),
           ),
-          value: name,
-          groupValue: widget.initTimezone,
+          selected: name == widget.initTimezone,
           visualDensity: visualDensity,
-          contentPadding: const EdgeInsets.symmetric(horizontal: 10),
-          onChanged: (String? value) {
-            widget.onTimezoneSelected?.call(value!, offsetInHours);
-            // print("TimezoneSelectWidget build onChanged:${value}");
+          contentPadding: const EdgeInsets.symmetric(horizontal: 24),
+          trailing: Visibility.maintain(
+            visible: name == widget.initTimezone,
+            child: const Icon(Icons.done_rounded),
+          ),
+          onTap: () {
+            widget.onTimezoneSelected?.call(name, offsetInHours);
           },
         ),
       );

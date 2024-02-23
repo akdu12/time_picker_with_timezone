@@ -104,30 +104,49 @@ class _TimezoneTypeSelectWidgetState extends State<TimezoneTypeSelectWidget> {
                 builder: (BuildContext context) {
                   return AlertDialog(
                     insetPadding: const EdgeInsets.symmetric(horizontal: 18, vertical: 24),
-                    titlePadding: const EdgeInsets.only(top: 4),
+                    iconPadding: const EdgeInsets.only(top: 8),
+                    // titlePadding: const EdgeInsets.only(top: 8),
                     contentPadding: EdgeInsets.zero,
                     actionsPadding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
-                    title: Column(
+                    // title: Column(
+                    //   children: [
+                    //     Row(
+                    //       children: [
+                    //         const SizedBox(width: 18),
+                    //         widget.timezoneSearchIcon ?? const Icon(Icons.search_rounded),
+                    //         const SizedBox(width: 8),
+                    //         Expanded(
+                    //           child: TextField(
+                    //             style: widget.timezoneSearchHintStyle,
+                    //             controller: searchController,
+                    //             decoration: InputDecoration(
+                    //               hintText: widget.timezoneSearchHint ?? '搜索时区',
+                    //               border: InputBorder.none,
+                    //             ),
+                    //           ),
+                    //         ),
+                    //         const SizedBox(width: 16),
+                    //       ],
+                    //     ),
+                    //     const Divider(height: 1),
+                    //   ],
+                    // ),
+                    icon: Row(
                       children: [
-                        Row(
-                          children: [
-                            const SizedBox(width: 18),
-                            widget.timezoneSearchIcon ?? const Icon(Icons.search_rounded),
-                            const SizedBox(width: 8),
-                            Expanded(
-                              child: TextField(
-                                style: widget.timezoneSearchHintStyle,
-                                controller: searchController,
-                                decoration: InputDecoration(
-                                  hintText: widget.timezoneSearchHint ?? '搜索时区',
-                                  border: InputBorder.none,
-                                ),
-                              ),
+                        const SizedBox(width: 20),
+                        widget.timezoneSearchIcon ?? const Icon(Icons.search_rounded),
+                        const SizedBox(width: 8),
+                        Expanded(
+                          child: TextField(
+                            style: widget.timezoneSearchHintStyle,
+                            controller: searchController,
+                            decoration: InputDecoration(
+                              hintText: widget.timezoneSearchHint ?? '搜索时区',
+                              border: InputBorder.none,
                             ),
-                            const SizedBox(width: 16),
-                          ],
+                          ),
                         ),
-                        const Divider(height: 1),
+                        const SizedBox(width: 20),
                       ],
                     ),
                     content: TimezoneSelectWidget(
@@ -162,7 +181,6 @@ class _TimezoneTypeSelectWidgetState extends State<TimezoneTypeSelectWidget> {
             },
             trailing: const Icon(Icons.keyboard_arrow_right_rounded),
           ),
-
         ],
       ),
     );
