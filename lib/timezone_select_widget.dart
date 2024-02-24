@@ -90,8 +90,10 @@ class _TimeZoneSelectWidgetState extends State<TimeZoneSelectWidget> {
     return SizedBox(
       height: MediaQuery.of(context).size.height / 2,
       width: 1000, //这样会被限制在最宽
-      child: ListView(
-        children: timezoneListWidget,
+      child: Scrollbar(
+        child: ListView(
+          children: timezoneListWidget,
+        ),
       ),
     );
     // return SingleChildScrollView(
