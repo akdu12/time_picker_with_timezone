@@ -9,26 +9,26 @@ import 'package:time_picker_with_timezone/timezone_util.dart';
 import 'package:timezone/data/latest_10y.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
-class TimezoneSelectWidget extends StatefulWidget {
-  const TimezoneSelectWidget({
+class TimeZoneSelectWidget extends StatefulWidget {
+  const TimeZoneSelectWidget({
     required this.searchController,
     super.key,
-    this.initTimezone,
+    this.initTimeZone,
     this.initOffsetInHours,
-    this.onTimezoneSelected,
+    this.onTimeZoneSelected,
   });
 
   final TextEditingController searchController;
-  final String? initTimezone;
+  final String? initTimeZone;
   final int? initOffsetInHours;
 
-  final Function(String timezone, int timeOffset)? onTimezoneSelected;
+  final Function(String timeZone, int timeOffset)? onTimeZoneSelected;
 
   @override
-  State<TimezoneSelectWidget> createState() => _TimezoneSelectWidgetState();
+  State<TimeZoneSelectWidget> createState() => _TimeZoneSelectWidgetState();
 }
 
-class _TimezoneSelectWidgetState extends State<TimezoneSelectWidget> {
+class _TimeZoneSelectWidgetState extends State<TimeZoneSelectWidget> {
   final visualDensity = const VisualDensity(horizontal: -4, vertical: -4);
   var searchText = "";
 
@@ -74,15 +74,15 @@ class _TimezoneSelectWidgetState extends State<TimezoneSelectWidget> {
             name,
             style: const TextStyle(fontSize: 12),
           ),
-          selected: name == widget.initTimezone,
+          selected: name == widget.initTimeZone,
           visualDensity: visualDensity,
           contentPadding: const EdgeInsets.symmetric(horizontal: 24),
           trailing: Visibility.maintain(
-            visible: name == widget.initTimezone,
+            visible: name == widget.initTimeZone,
             child: const Icon(Icons.done_rounded),
           ),
           onTap: () {
-            widget.onTimezoneSelected?.call(name, offsetInHours);
+            widget.onTimeZoneSelected?.call(name, offsetInHours);
           },
         ),
       );

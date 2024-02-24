@@ -6,44 +6,44 @@ import 'package:flutter/material.dart';
 import 'package:time_picker_with_timezone/timezone_select_widget.dart';
 import 'package:time_picker_with_timezone/timezone_util.dart';
 
-class TimezoneTypeSelectWidget extends StatefulWidget {
-  const TimezoneTypeSelectWidget({
+class TimeZoneTypeSelectWidget extends StatefulWidget {
+  const TimeZoneTypeSelectWidget({
     super.key,
-    this.initTimezoneType,
-    this.initTimezone,
+    this.initTimeZoneType,
+    this.initTimeZone,
     this.initOffsetInHours,
     this.fixedTimeTitle,
     this.fixedTimeSubTitle,
-    this.timezoneTimeTitle,
+    this.timeZoneTimeTitle,
     // this.timezoneTimeSubTitle,
 
-    this.timezoneSearchIcon,
-    this.timezoneSearchHintStyle,
-    this.timezoneSearchHint,
-    this.onTimezoneTypeSelected,
+    this.timeZoneSearchIcon,
+    this.timeZoneSearchHintStyle,
+    this.timeZoneSearchHint,
+    this.onTimeZoneTypeSelected,
   });
 
-  final int? initTimezoneType;
-  final String? initTimezone;
+  final int? initTimeZoneType;
+  final String? initTimeZone;
   final int? initOffsetInHours;
 
   final String? fixedTimeTitle;
   final String? fixedTimeSubTitle;
-  final String? timezoneTimeTitle;
+  final String? timeZoneTimeTitle;
 
   // final String? timezoneTimeSubTitle;
 
-  final Icon? timezoneSearchIcon;
-  final String? timezoneSearchHint;
-  final TextStyle? timezoneSearchHintStyle;
+  final Icon? timeZoneSearchIcon;
+  final String? timeZoneSearchHint;
+  final TextStyle? timeZoneSearchHintStyle;
 
-  final Function(int type, String? timezone, int? offsetInHours)? onTimezoneTypeSelected;
+  final Function(int type, String? timezone, int? offsetInHours)? onTimeZoneTypeSelected;
 
   @override
-  State<TimezoneTypeSelectWidget> createState() => _TimezoneTypeSelectWidgetState();
+  State<TimeZoneTypeSelectWidget> createState() => _TimeZoneTypeSelectWidgetState();
 }
 
-class _TimezoneTypeSelectWidgetState extends State<TimezoneTypeSelectWidget> {
+class _TimeZoneTypeSelectWidgetState extends State<TimeZoneTypeSelectWidget> {
   final visualDensity = const VisualDensity(horizontal: -2, vertical: 0);
   final contentPadding = const EdgeInsets.only(left: 20, right: 16);
   final titleTextStyle = const TextStyle(fontSize: 12);
@@ -70,31 +70,31 @@ class _TimezoneTypeSelectWidgetState extends State<TimezoneTypeSelectWidget> {
               widget.fixedTimeSubTitle ?? '时间不随时区变化',
               style: titleTextStyle,
             ),
-            selected: widget.initTimezoneType == 0,
+            selected: widget.initTimeZoneType == 0,
             visualDensity: visualDensity,
             contentPadding: contentPadding,
             leading: Visibility.maintain(
-              visible: widget.initTimezoneType == 0,
+              visible: widget.initTimeZoneType == 0,
               child: const Icon(Icons.done_rounded),
             ),
             onTap: () {
-              widget.onTimezoneTypeSelected?.call(0, "", 0);
+              widget.onTimeZoneTypeSelected?.call(0, "", 0);
               Navigator.of(context).pop();
             },
           ),
           ListTile(
-            title: Text(widget.timezoneTimeTitle ?? '时区时间'),
-            subtitle: widget.initTimezone != null && widget.initTimezone!.isNotEmpty && widget.initOffsetInHours != null
+            title: Text(widget.timeZoneTimeTitle ?? '时区时间'),
+            subtitle: widget.initTimeZone != null && widget.initTimeZone!.isNotEmpty && widget.initOffsetInHours != null
                 ? Text(
-                    "${widget.initTimezone}, UTC${TimezoneUtil.timeOffset2String(widget.initOffsetInHours)}",
+                    "${widget.initTimeZone}, UTC${TimezoneUtil.timeOffset2String(widget.initOffsetInHours)}",
                     style: titleTextStyle,
                   )
                 : null,
-            selected: widget.initTimezoneType == 1,
+            selected: widget.initTimeZoneType == 1,
             visualDensity: visualDensity,
             contentPadding: contentPadding,
             leading: Visibility.maintain(
-              visible: widget.initTimezoneType == 1,
+              visible: widget.initTimeZoneType == 1,
               child: const Icon(Icons.done_rounded),
             ),
             onTap: () {
@@ -108,40 +108,17 @@ class _TimezoneTypeSelectWidgetState extends State<TimezoneTypeSelectWidget> {
                     // titlePadding: const EdgeInsets.only(top: 8),
                     contentPadding: EdgeInsets.zero,
                     actionsPadding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
-                    // title: Column(
-                    //   children: [
-                    //     Row(
-                    //       children: [
-                    //         const SizedBox(width: 18),
-                    //         widget.timezoneSearchIcon ?? const Icon(Icons.search_rounded),
-                    //         const SizedBox(width: 8),
-                    //         Expanded(
-                    //           child: TextField(
-                    //             style: widget.timezoneSearchHintStyle,
-                    //             controller: searchController,
-                    //             decoration: InputDecoration(
-                    //               hintText: widget.timezoneSearchHint ?? '搜索时区',
-                    //               border: InputBorder.none,
-                    //             ),
-                    //           ),
-                    //         ),
-                    //         const SizedBox(width: 16),
-                    //       ],
-                    //     ),
-                    //     const Divider(height: 1),
-                    //   ],
-                    // ),
                     icon: Row(
                       children: [
                         const SizedBox(width: 20),
-                        widget.timezoneSearchIcon ?? const Icon(Icons.search_rounded),
+                        widget.timeZoneSearchIcon ?? const Icon(Icons.search_rounded),
                         const SizedBox(width: 8),
                         Expanded(
                           child: TextField(
-                            style: widget.timezoneSearchHintStyle,
+                            style: widget.timeZoneSearchHintStyle,
                             controller: searchController,
                             decoration: InputDecoration(
-                              hintText: widget.timezoneSearchHint ?? '搜索时区',
+                              hintText: widget.timeZoneSearchHint ?? '搜索时区',
                               border: InputBorder.none,
                             ),
                           ),
@@ -149,12 +126,12 @@ class _TimezoneTypeSelectWidgetState extends State<TimezoneTypeSelectWidget> {
                         const SizedBox(width: 20),
                       ],
                     ),
-                    content: TimezoneSelectWidget(
+                    content: TimeZoneSelectWidget(
                       searchController: searchController,
-                      initTimezone: widget.initTimezone,
+                      initTimeZone: widget.initTimeZone,
                       initOffsetInHours: widget.initOffsetInHours,
-                      onTimezoneSelected: (String timezone, int offsetInHours) {
-                        widget.onTimezoneTypeSelected?.call(1, timezone, offsetInHours);
+                      onTimeZoneSelected: (String timeZone, int offsetInHours) {
+                        widget.onTimeZoneTypeSelected?.call(1, timeZone, offsetInHours);
                         Navigator.of(context).pop();
                         //连续弹出两次到时间选择页面
                         Navigator.of(context).pop();

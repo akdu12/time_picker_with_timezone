@@ -37,11 +37,11 @@ class ExampleWidget extends StatelessWidget {
             showCustomTimePicker(
               context: context,
               initialTime: TimeOfDay.now(),
-              initTimezoneType: 1,
-              initTimezone: "Asia/Shanghai",
+              initTimeZoneType: 1,
+              initTimeZone: "Asia/Shanghai",
               initOffsetInHours: 0,
-              timezoneHelpPressed: () {
-                print('timezoneHelpPressed');
+              timeZoneHelpPressed: () {
+                print('timeZoneHelpPressed');
               },
             ).then((value) {
               print(value);
