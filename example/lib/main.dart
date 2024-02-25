@@ -37,39 +37,27 @@ class ExampleWidget extends StatelessWidget {
           onPressed: () {
             showCustomTimePicker(
               context: context,
-              // enableTimeZone: true,
-              // timeZoneShowType: TimeZoneShowType.abbreviation,
+              enableTimeZone: true,
+              timeZoneShowType: TimeZoneShowType.nameAndOffset,
               initialTime: TimeOfDay.now(),
-              // initTimeZoneType: TimeZoneType.fixedTime,
-              // initTimeZoneData: const TimeZoneData(
-              //   name: "Asia/Shanghai",
-              //   abbreviation: "CST",
-              //   offset: 8,
-              //   isDst: false,
-              // ),
-              // customTimeZoneDataList: [
-              //   TimeZoneData(
-              //     name: "Asia/Shanghai",
-              //     abbreviation: "CST",
-              //     offset: 8,
-              //     isDst: false,
-              //   ),
-              //   TimeZoneData(
-              //     name: "Asia/Shanghai2",
-              //     abbreviation: "CST",
-              //     offset: 8,
-              //     isDst: false,
-              //   ),
-              //   TimeZoneData(
-              //     name: "Asia/Shanghai3",
-              //     abbreviation: "CST",
-              //     offset: 8,
-              //     isDst: false,
-              //   )
-              // ],
+              initTimeZoneType: TimeZoneType.fixedTime,
+              initTimeZoneData: const TimeZoneData(name: "Asia/Shanghai", abbreviation: "CST", offset: 8, isDst: false),
+              customTimeZoneDataList: const [
+                TimeZoneData(name: "Asia/Shanghai", abbreviation: "CST", offset: 8, isDst: false),
+                TimeZoneData(name: "Africa/Algiers", abbreviation: "CET", offset: 1, isDst: false),
+                TimeZoneData(name: "America/Adak", abbreviation: "HST", offset: -10, isDst: false),
+              ],
+              timeZoneHelpIcon: const Icon(Icons.help),
               timeZoneHelpPressed: () {
                 print('timeZoneHelpPressed');
               },
+              timeZoneTypeTitle: "时区设置",
+              fixedTimeTitle: "固定时间",
+              fixedTimeSubTitle: "时间不随时区变化",
+              timeZoneTimeTitle: "时区时间",
+              timeZoneSearchIcon: const Icon(Icons.search_rounded),
+              timeZoneSearchHint: "搜索时区",
+              timeZoneSearchHintStyle: const TextStyle(fontSize: 16),
             ).then((value) {
               print(value);
             });
