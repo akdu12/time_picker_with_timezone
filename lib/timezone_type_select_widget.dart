@@ -68,9 +68,9 @@ class _TimeZoneTypeSelectWidgetState extends State<TimeZoneTypeSelectWidget> {
       child: ListBody(
         children: <Widget>[
           ListTile(
-            title: Text(widget.fixedTimeTitle ?? '固定时间'),
+            title: Text(widget.fixedTimeTitle ?? 'Fixed time'),
             subtitle: Text(
-              widget.fixedTimeSubTitle ?? '时间不随时区变化',
+              widget.fixedTimeSubTitle ?? 'Does not vary by time zone',
               style: titleTextStyle,
             ),
             selected: widget.initTimeZoneType == TimeZoneType.fixedTime,
@@ -86,7 +86,7 @@ class _TimeZoneTypeSelectWidgetState extends State<TimeZoneTypeSelectWidget> {
             },
           ),
           ListTile(
-            title: Text(widget.timeZoneTimeTitle ?? '时区时间'),
+            title: Text(widget.timeZoneTimeTitle ?? 'Time zone time'),
             subtitle: widget.initTimeZoneData != null
                 ? Text(
                     TimezoneUtil.timeZoneString(widget.initTimeZoneData!, widget.timeZoneShowType!),
@@ -121,7 +121,7 @@ class _TimeZoneTypeSelectWidgetState extends State<TimeZoneTypeSelectWidget> {
                             style: widget.timeZoneSearchHintStyle,
                             controller: searchController,
                             decoration: InputDecoration(
-                              hintText: widget.timeZoneSearchHint ?? '搜索时区',
+                              hintText: widget.timeZoneSearchHint ?? 'Search for time zone',
                               border: InputBorder.none,
                             ),
                           ),

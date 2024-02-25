@@ -2059,7 +2059,7 @@ class _TitleAndTimeZoneState extends State<_TitleAndTimeZone> {
                         actionsPadding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
                         title: Row(
                           children: [
-                            Text(widget.timeZoneTypeTitle ?? '时区设置'),
+                            Text(widget.timeZoneTypeTitle ?? 'Time zone setting'),
                             // const SizedBox(width: 8),
 
                             //不显示时也需要位置占位，保持UI一致性
@@ -2117,7 +2117,7 @@ class _TitleAndTimeZoneState extends State<_TitleAndTimeZone> {
                     ConstrainedBox(
                       constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width / 2),
                       child: Text(
-                        _timeZoneType == TimeZoneType.fixedTime ? widget.fixedTimeTitle ?? "固定时间" : TimezoneUtil.timeZoneString(_timeZoneData!, widget.timeZoneShowType!),
+                        _timeZoneType == TimeZoneType.fixedTime ? widget.fixedTimeTitle ?? "Fixed time" : TimezoneUtil.timeZoneString(_timeZoneData!, widget.timeZoneShowType!),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),

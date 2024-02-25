@@ -1,7 +1,9 @@
 name: time_picker_with_timezone
-description: "A new Flutter package project."
+description: "TimePicker with TimeZoneSelector."
 version: 0.0.1
 homepage:
+repository: https://github.com/lijianqiang12/time_picker_with_timezone
+issue_tracker: https://github.com/lijianqiang12/time_picker_with_timezone/issues
 
 environment:
   sdk: '>=3.3.0 <4.0.0'
