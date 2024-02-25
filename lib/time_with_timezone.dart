@@ -54,3 +54,10 @@ enum TimeZoneType {
 
   const TimeZoneType(this.value);
 }
+
+enum TimeZoneShowType {
+  abbreviation,
+  name,
+  nameAndOffset,
+  abbreviationAndOffset,
+}

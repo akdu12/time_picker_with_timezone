@@ -10,6 +10,7 @@ import 'package:time_picker_with_timezone/timezone_util.dart';
 class TimeZoneTypeSelectWidget extends StatefulWidget {
   const TimeZoneTypeSelectWidget({
     super.key,
+    this.timeZoneShowType,
     this.initTimeZoneType,
     this.initTimeZoneData,
     this.customTimeZoneDataList,
@@ -24,6 +25,7 @@ class TimeZoneTypeSelectWidget extends StatefulWidget {
     this.onTimeZoneTypeSelected,
   });
 
+  final TimeZoneShowType? timeZoneShowType;
   final TimeZoneType? initTimeZoneType;
   final TimeZoneData? initTimeZoneData;
   final List<TimeZoneData>? customTimeZoneDataList;
@@ -87,7 +89,7 @@ class _TimeZoneTypeSelectWidgetState extends State<TimeZoneTypeSelectWidget> {
             title: Text(widget.timeZoneTimeTitle ?? '时区时间'),
             subtitle: widget.initTimeZoneData != null
                 ? Text(
-                    "${widget.initTimeZoneData!.name}, UTC${TimezoneUtil.timeOffset2String(widget.initTimeZoneData!.offset)}",
+                    TimezoneUtil.timeZoneString(widget.initTimeZoneData!, widget.timeZoneShowType!),
                     style: titleTextStyle,
                   )
                 : null,

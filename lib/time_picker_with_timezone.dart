@@ -200,6 +200,7 @@ class _TimePickerHeader extends StatelessWidget {
   const _TimePickerHeader({
     required this.helpText,
     this.enableTimeZone,
+    this.timeZoneShowType,
     this.initTimeZoneType,
     this.initTimeZoneData,
     this.customTimeZoneDataList,
@@ -218,6 +219,7 @@ class _TimePickerHeader extends StatelessWidget {
   final String helpText;
 
   final bool? enableTimeZone;
+  final TimeZoneShowType? timeZoneShowType;
   final TimeZoneType? initTimeZoneType;
   final TimeZoneData? initTimeZoneData;
   final List<TimeZoneData>? customTimeZoneDataList;
@@ -247,9 +249,10 @@ class _TimePickerHeader extends StatelessWidget {
           children: <Widget>[
             Padding(
               padding: EdgeInsetsDirectional.only(bottom: _TimePickerModel.useMaterial3Of(context) ? 0 : 4),
-              child: _TitleAndTimezone(
+              child: _TitleAndTimeZone(
                 helpText: helpText,
                 enableTimeZone: enableTimeZone,
+                timeZoneShowType: timeZoneShowType,
                 initTimeZoneType: initTimeZoneType,
                 initTimeZoneData: initTimeZoneData,
                 customTimeZoneDataList: customTimeZoneDataList,
@@ -295,9 +298,10 @@ class _TimePickerHeader extends StatelessWidget {
           width: _kTimePickerHeaderLandscapeWidth,
           child: Stack(
             children: <Widget>[
-              _TitleAndTimezone(
+              _TitleAndTimeZone(
                 helpText: helpText,
                 enableTimeZone: enableTimeZone,
+                timeZoneShowType: timeZoneShowType,
                 initTimeZoneType: initTimeZoneType,
                 initTimeZoneData: initTimeZoneData,
                 customTimeZoneDataList: customTimeZoneDataList,
@@ -1634,6 +1638,7 @@ class _TimePickerInput extends StatefulWidget {
     required this.autofocusHour,
     required this.autofocusMinute,
     this.enableTimeZone,
+    this.timeZoneShowType,
     this.initTimeZoneType,
     this.initTimeZoneData,
     this.customTimeZoneDataList,
@@ -1669,6 +1674,7 @@ class _TimePickerInput extends StatefulWidget {
   final bool? autofocusMinute;
 
   final bool? enableTimeZone;
+  final TimeZoneShowType? timeZoneShowType;
   final TimeZoneType? initTimeZoneType;
   final TimeZoneData? initTimeZoneData;
   final List<TimeZoneData>? customTimeZoneDataList;
@@ -1832,9 +1838,10 @@ class _TimePickerInputState extends State<_TimePickerInput> with RestorationMixi
           //title and timezone
           Padding(
             padding: EdgeInsetsDirectional.only(bottom: _TimePickerModel.useMaterial3Of(context) ? 0 : 4),
-            child: _TitleAndTimezone(
+            child: _TitleAndTimeZone(
               helpText: widget.helpText,
               enableTimeZone: widget.enableTimeZone,
+              timeZoneShowType: widget.timeZoneShowType,
               initTimeZoneType: widget.initTimeZoneType,
               initTimeZoneData: widget.initTimeZoneData,
               customTimeZoneDataList: widget.customTimeZoneDataList,
@@ -1952,11 +1959,12 @@ class _TimePickerInputState extends State<_TimePickerInput> with RestorationMixi
   }
 }
 
-class _TitleAndTimezone extends StatefulWidget {
-  const _TitleAndTimezone({
+class _TitleAndTimeZone extends StatefulWidget {
+  const _TitleAndTimeZone({
     super.key,
     required this.helpText,
     this.enableTimeZone,
+    this.timeZoneShowType,
     this.initTimeZoneType,
     this.initTimeZoneData,
     this.customTimeZoneDataList,
@@ -1975,6 +1983,7 @@ class _TitleAndTimezone extends StatefulWidget {
   final String helpText;
 
   final bool? enableTimeZone;
+  final TimeZoneShowType? timeZoneShowType;
   final TimeZoneType? initTimeZoneType;
   final TimeZoneData? initTimeZoneData;
   final List<TimeZoneData>? customTimeZoneDataList;
@@ -1991,10 +2000,10 @@ class _TitleAndTimezone extends StatefulWidget {
   final Function(TimeZoneType timeZoneType, TimeZoneData? timeZoneData)? onTimeZoneTypeSelected;
 
   @override
-  State<_TitleAndTimezone> createState() => _TitleAndTimezoneState();
+  State<_TitleAndTimeZone> createState() => _TitleAndTimeZoneState();
 }
 
-class _TitleAndTimezoneState extends State<_TitleAndTimezone> {
+class _TitleAndTimeZoneState extends State<_TitleAndTimeZone> {
   TimeZoneType? _timeZoneType;
 
   TimeZoneData? _timeZoneData;
@@ -2038,6 +2047,8 @@ class _TitleAndTimezoneState extends State<_TitleAndTimezone> {
               transform: Matrix4.translationValues(16.0, 0.0, 0.0),
               child: TextButton(
                 onPressed: () async {
+                  if (!(widget.enableTimeZone ?? true)) return;
+
                   showDialog(
                     context: context,
                     builder: (BuildContext context) {
@@ -2053,7 +2064,7 @@ class _TitleAndTimezoneState extends State<_TitleAndTimezone> {
 
                             //不显示时也需要位置占位，保持UI一致性
                             Visibility.maintain(
-                              visible: widget.timeZoneHelpIcon != null,
+                              visible: widget.timeZoneHelpIcon != null || widget.timeZoneHelpPressed != null,
                               child: IconButton(
                                 icon: widget.timeZoneHelpIcon ?? const Icon(Icons.help_outline_rounded),
                                 onPressed: widget.timeZoneHelpPressed,
@@ -2062,6 +2073,7 @@ class _TitleAndTimezoneState extends State<_TitleAndTimezone> {
                           ],
                         ),
                         content: TimeZoneTypeSelectWidget(
+                          timeZoneShowType: widget.timeZoneShowType,
                           initTimeZoneType: _timeZoneType,
                           initTimeZoneData: _timeZoneData,
                           customTimeZoneDataList: widget.customTimeZoneDataList,
@@ -2105,9 +2117,7 @@ class _TitleAndTimezoneState extends State<_TitleAndTimezone> {
                     ConstrainedBox(
                       constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width / 2),
                       child: Text(
-                        _timeZoneType == TimeZoneType.fixedTime
-                            ? widget.fixedTimeTitle ?? "固定时间"
-                            : "${_timeZoneData!.name}, UTC${TimezoneUtil.timeOffset2String(_timeZoneData!.offset)}",
+                        _timeZoneType == TimeZoneType.fixedTime ? widget.fixedTimeTitle ?? "固定时间" : TimezoneUtil.timeZoneString(_timeZoneData!, widget.timeZoneShowType!),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -2388,6 +2398,7 @@ class TimePickerDialog extends StatefulWidget {
     this.confirmText,
     this.helpText,
     this.enableTimeZone,
+    this.timeZoneShowType,
     this.initTimeZoneType,
     this.initTimeZoneData,
     this.customTimeZoneDataList,
@@ -2426,6 +2437,7 @@ class TimePickerDialog extends StatefulWidget {
   final String? helpText;
 
   final bool? enableTimeZone;
+  final TimeZoneShowType? timeZoneShowType;
   final TimeZoneType? initTimeZoneType;
   final TimeZoneData? initTimeZoneData;
   final List<TimeZoneData>? customTimeZoneDataList;
@@ -2776,6 +2788,7 @@ class _TimePickerDialogState extends State<TimePickerDialog> with RestorationMix
                           onTimeChanged: _handleTimeChanged,
                           helpText: widget.helpText,
                           enableTimeZone: widget.enableTimeZone,
+                          timeZoneShowType: widget.timeZoneShowType,
                           initTimeZoneType: widget.initTimeZoneType,
                           initTimeZoneData: widget.initTimeZoneData,
                           customTimeZoneDataList: widget.customTimeZoneDataList,
@@ -2828,6 +2841,7 @@ class _TimePicker extends StatefulWidget {
     required this.onTimeChanged,
     this.helpText,
     this.enableTimeZone,
+    this.timeZoneShowType,
     this.initTimeZoneType,
     this.initTimeZoneData,
     this.customTimeZoneDataList,
@@ -2881,6 +2895,7 @@ class _TimePicker extends StatefulWidget {
   final String? minuteLabelText;
 
   final bool? enableTimeZone;
+  final TimeZoneShowType? timeZoneShowType;
   final TimeZoneType? initTimeZoneType;
   final TimeZoneData? initTimeZoneData;
   final List<TimeZoneData>? customTimeZoneDataList;
@@ -3173,6 +3188,7 @@ class _TimePickerState extends State<_TimePicker> with RestorationMixin {
                   child: _TimePickerHeader(
                     helpText: helpText,
                     enableTimeZone: widget.enableTimeZone,
+                    timeZoneShowType: widget.timeZoneShowType,
                     initTimeZoneType: widget.initTimeZoneType,
                     initTimeZoneData: widget.initTimeZoneData,
                     customTimeZoneDataList: widget.customTimeZoneDataList,
@@ -3215,12 +3231,14 @@ class _TimePickerState extends State<_TimePicker> with RestorationMixin {
                       children: <Widget>[
                         _TimePickerHeader(
                           helpText: helpText,
+                          enableTimeZone: widget.enableTimeZone,
+                          timeZoneShowType: widget.timeZoneShowType,
+                          initTimeZoneType: widget.initTimeZoneType,
                           initTimeZoneData: widget.initTimeZoneData,
                           customTimeZoneDataList: widget.customTimeZoneDataList,
                           timeZoneSearchHint: widget.timeZoneSearchHint,
                           timeZoneSearchHintStyle: widget.timeZoneSearchHintStyle,
                           timeZoneSearchIcon: widget.timeZoneSearchIcon,
-                          enableTimeZone: widget.enableTimeZone,
                           timeZoneTypeTitle: widget.timeZoneTypeTitle,
                           timeZoneHelpIcon: widget.timeZoneHelpIcon,
                           timeZoneHelpPressed: widget.timeZoneHelpPressed,
@@ -3251,6 +3269,7 @@ class _TimePickerState extends State<_TimePicker> with RestorationMixin {
               minuteLabelText: widget.minuteLabelText,
               helpText: helpText,
               enableTimeZone: widget.enableTimeZone,
+              timeZoneShowType: widget.timeZoneShowType,
               initTimeZoneType: widget.initTimeZoneType,
               initTimeZoneData: widget.initTimeZoneData,
               customTimeZoneDataList: widget.customTimeZoneDataList,
@@ -3402,6 +3421,7 @@ Future<TimeWithTimeZone?> showCustomTimePicker({
   Offset? anchorPoint,
   Orientation? orientation,
   bool enableTimeZone = true,
+  TimeZoneShowType timeZoneShowType = TimeZoneShowType.nameAndOffset,
   TimeZoneType initTimeZoneType = TimeZoneType.fixedTime,
   TimeZoneData? initTimeZoneData,
   final List<TimeZoneData>? customTimeZoneDataList,
@@ -3425,6 +3445,7 @@ Future<TimeWithTimeZone?> showCustomTimePicker({
     confirmText: confirmText,
     helpText: helpText,
     enableTimeZone: enableTimeZone,
+    timeZoneShowType: timeZoneShowType,
     initTimeZoneType: initTimeZoneType,
     initTimeZoneData: initTimeZoneData,
     customTimeZoneDataList: customTimeZoneDataList,

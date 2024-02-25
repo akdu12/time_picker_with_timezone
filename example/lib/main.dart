@@ -37,14 +37,16 @@ class ExampleWidget extends StatelessWidget {
           onPressed: () {
             showCustomTimePicker(
               context: context,
+              // enableTimeZone: true,
+              // timeZoneShowType: TimeZoneShowType.abbreviation,
               initialTime: TimeOfDay.now(),
-              initTimeZoneType: TimeZoneType.fixedTime,
-              initTimeZoneData: const TimeZoneData(
-                name: "Asia/Shanghai",
-                abbreviation: "CST",
-                offset: 8,
-                isDst: false,
-              ),
+              // initTimeZoneType: TimeZoneType.fixedTime,
+              // initTimeZoneData: const TimeZoneData(
+              //   name: "Asia/Shanghai",
+              //   abbreviation: "CST",
+              //   offset: 8,
+              //   isDst: false,
+              // ),
               // customTimeZoneDataList: [
               //   TimeZoneData(
               //     name: "Asia/Shanghai",

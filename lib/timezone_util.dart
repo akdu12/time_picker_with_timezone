@@ -2,6 +2,8 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+import 'package:time_picker_with_timezone/time_with_timezone.dart';
+
 /// Convert a time offset in hours to a string representation
 /// eg: -1 -> "-01:00"
 class TimezoneUtil {
@@ -23,5 +25,24 @@ class TimezoneUtil {
     offsetStr += ":00";
 
     return offsetStr;
+  }
+
+  static String timeZoneString(TimeZoneData timeZoneData, TimeZoneShowType timeZoneShowType) {
+    String timeZoneStr = "";
+    switch (timeZoneShowType) {
+      case TimeZoneShowType.name:
+        timeZoneStr = timeZoneData.name;
+        break;
+      case TimeZoneShowType.nameAndOffset:
+        timeZoneStr = "${timeZoneData.name}, UTC${TimezoneUtil.timeOffset2String(timeZoneData.offset)}";
+        break;
+      case TimeZoneShowType.abbreviation:
+        timeZoneStr = timeZoneData.abbreviation;
+        break;
+      case TimeZoneShowType.abbreviationAndOffset:
+        timeZoneStr = "${timeZoneData.abbreviation}, UTC${TimezoneUtil.timeOffset2String(timeZoneData.offset)}";
+        break;
+    }
+    return timeZoneStr;
   }
 }
