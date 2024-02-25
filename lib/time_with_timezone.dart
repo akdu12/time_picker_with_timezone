@@ -41,6 +41,15 @@ class TimeZoneData {
   final bool isDst;
 
   @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    return other is TimeZoneData && other.name == name && other.abbreviation == abbreviation && other.offset == offset && other.isDst == isDst;
+  }
+
+  @override
+  int get hashCode => name.hashCode ^ abbreviation.hashCode ^ offset.hashCode ^ isDst.hashCode;
+
+  @override
   String toString() {
     return 'TimeZoneData{name: $name, abbreviation: $abbreviation, offsetInHours: $offset, isDst: $isDst}';
   }

@@ -56,6 +56,19 @@ class _TimeZoneSelectWidgetState extends State<TimeZoneSelectWidget> {
   Widget build(BuildContext context) {
     final List<Widget> timezoneListWidget = [];
 
+    //如果有已选中数据，就添加到列表首位
+    if (widget.initTimeZoneData != null) {
+      timezoneListWidget.add(
+        _buildTimeZoneItemWidget(
+          timeZoneData: widget.initTimeZoneData!,
+          selected: true,
+          onTap: (timeZoneData) {
+            widget.onTimeZoneSelected?.call(timeZoneData);
+          },
+        ),
+      );
+    }
+
     if (widget.customTimeZoneDataList == null) {
       tz.timeZoneDatabase.locations.forEach((name, location) {
         final currentTimeZone = location.currentTimeZone;
@@ -64,7 +77,9 @@ class _TimeZoneSelectWidgetState extends State<TimeZoneSelectWidget> {
           return;
         }
 
-        final isDst = currentTimeZone.isDst;
+        if (widget.initTimeZoneData == TimeZoneData(name: name, abbreviation: currentTimeZone.abbreviation, offset: currentTimeZone.offset, isDst: currentTimeZone.isDst)) {
+          return;
+        }
 
         timezoneListWidget.add(
           _buildTimeZoneItemWidget(
@@ -86,6 +101,11 @@ class _TimeZoneSelectWidgetState extends State<TimeZoneSelectWidget> {
         if (searchText.isNotEmpty && !element.name.toLowerCase().contains(searchText.toLowerCase()) && !element.abbreviation.toLowerCase().contains(searchText.toLowerCase())) {
           continue;
         }
+
+        if (widget.initTimeZoneData == element) {
+          continue;
+        }
+
         timezoneListWidget.add(
           _buildTimeZoneItemWidget(
             timeZoneData: element,
