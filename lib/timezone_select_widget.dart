@@ -3,6 +3,7 @@
 // found in the LICENSE file.
 
 import 'package:flutter/material.dart';
+import 'package:time_picker_with_timezone/time_with_timezone.dart';
 import 'package:time_picker_with_timezone/timezone_util.dart';
 
 // import 'package:timezone/data/latest.dart' as tz;
@@ -13,16 +14,16 @@ class TimeZoneSelectWidget extends StatefulWidget {
   const TimeZoneSelectWidget({
     required this.searchController,
     super.key,
-    this.initTimeZone,
-    this.initOffsetInHours,
+    this.initTimeZoneData,
+    this.customTimeZoneDataList,
     this.onTimeZoneSelected,
   });
 
   final TextEditingController searchController;
-  final String? initTimeZone;
-  final int? initOffsetInHours;
 
-  final Function(String timeZone, int timeOffset)? onTimeZoneSelected;
+  final TimeZoneData? initTimeZoneData;
+  final List<TimeZoneData>? customTimeZoneDataList;
+  final Function(TimeZoneData initTimeZoneData)? onTimeZoneSelected;
 
   @override
   State<TimeZoneSelectWidget> createState() => _TimeZoneSelectWidgetState();
@@ -55,38 +56,48 @@ class _TimeZoneSelectWidgetState extends State<TimeZoneSelectWidget> {
   Widget build(BuildContext context) {
     final List<Widget> timezoneListWidget = [];
 
-    tz.timeZoneDatabase.locations.forEach((name, location) {
-      if (searchText.isNotEmpty && !name.toLowerCase().contains(searchText.toLowerCase())) {
-        return;
+    if (widget.customTimeZoneDataList == null) {
+      tz.timeZoneDatabase.locations.forEach((name, location) {
+        final currentTimeZone = location.currentTimeZone;
+
+        if (searchText.isNotEmpty && !name.toLowerCase().contains(searchText.toLowerCase()) && !currentTimeZone.abbreviation.toLowerCase().contains(searchText.toLowerCase())) {
+          return;
+        }
+
+        final isDst = currentTimeZone.isDst;
+
+        timezoneListWidget.add(
+          _buildTimeZoneItemWidget(
+            timeZoneData: TimeZoneData(
+              name: name,
+              abbreviation: currentTimeZone.abbreviation,
+              offset: currentTimeZone.offset,
+              isDst: currentTimeZone.isDst,
+            ),
+            selected: name == widget.initTimeZoneData?.name,
+            onTap: (timeZoneData) {
+              widget.onTimeZoneSelected?.call(timeZoneData);
+            },
+          ),
+        );
+      });
+    } else {
+      for (var element in widget.customTimeZoneDataList!) {
+        if (searchText.isNotEmpty && !element.name.toLowerCase().contains(searchText.toLowerCase()) && !element.abbreviation.toLowerCase().contains(searchText.toLowerCase())) {
+          continue;
+        }
+        timezoneListWidget.add(
+          _buildTimeZoneItemWidget(
+            timeZoneData: element,
+            selected: element.name == widget.initTimeZoneData?.name,
+            onTap: (timeZoneData) {
+              widget.onTimeZoneSelected?.call(timeZoneData);
+            },
+          ),
+        );
       }
+    }
 
-      final offsetInSeconds = location.currentTimeZone.offset ~/ 1000;
-      final offsetInHours = offsetInSeconds ~/ 3600;
-      final isDst = location.currentTimeZone.isDst;
-      final abbreviation = location.currentTimeZone.abbreviation;
-
-      final offsetStr = TimezoneUtil.timeOffset2String(offsetInHours);
-
-      timezoneListWidget.add(
-        ListTile(
-          title: Text("$abbreviation, UTC$offsetStr${isDst ? " DST" : ""}"),
-          subtitle: Text(
-            name,
-            style: const TextStyle(fontSize: 12),
-          ),
-          selected: name == widget.initTimeZone,
-          visualDensity: visualDensity,
-          contentPadding: const EdgeInsets.symmetric(horizontal: 24),
-          trailing: Visibility.maintain(
-            visible: name == widget.initTimeZone,
-            child: const Icon(Icons.done_rounded),
-          ),
-          onTap: () {
-            widget.onTimeZoneSelected?.call(name, offsetInHours);
-          },
-        ),
-      );
-    });
     return SizedBox(
       height: MediaQuery.of(context).size.height / 2,
       width: 1000, //这样会被限制在最宽
@@ -96,10 +107,26 @@ class _TimeZoneSelectWidgetState extends State<TimeZoneSelectWidget> {
         ),
       ),
     );
-    // return SingleChildScrollView(
-    //   child: ListBody(
-    //     children: timezoneListWidget,
-    //   ),
-    // );
+  }
+
+  //创建时区列表项
+  Widget _buildTimeZoneItemWidget({required TimeZoneData timeZoneData, required bool selected, required Function(TimeZoneData timeZoneData) onTap}) {
+    return ListTile(
+      title: Text("${timeZoneData.abbreviation}, UTC${TimezoneUtil.timeOffset2String(timeZoneData.offset)}${timeZoneData.isDst ? " DST" : ""}"),
+      subtitle: Text(
+        timeZoneData.name,
+        style: const TextStyle(fontSize: 12),
+      ),
+      selected: selected,
+      visualDensity: visualDensity,
+      contentPadding: const EdgeInsets.symmetric(horizontal: 24),
+      trailing: Visibility.maintain(
+        visible: selected,
+        child: const Icon(Icons.done_rounded),
+      ),
+      onTap: () {
+        onTap.call(timeZoneData);
+      },
+    );
   }
 }

@@ -5,9 +5,11 @@
 /// Convert a time offset in hours to a string representation
 /// eg: -1 -> "-01:00"
 class TimezoneUtil {
-  static String timeOffset2String(int? offsetInHours) {
-    if (offsetInHours == null) return "";
+  static String timeOffset2String(int? offset) {
+    if (offset == null) return "";
     String offsetStr = "";
+
+    int offsetInHours = offset ~/ 1000 ~/ 3600;
     if (offsetInHours >= 10) {
       offsetStr += "+$offsetInHours";
     } else if (offsetInHours >= 0) {

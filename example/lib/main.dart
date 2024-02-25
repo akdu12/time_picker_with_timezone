@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:time_picker_with_timezone/time_picker_with_timezone.dart';
+import 'package:time_picker_with_timezone/time_with_timezone.dart';
 
 void main() => runApp(const MyApp());
 
@@ -37,9 +38,33 @@ class ExampleWidget extends StatelessWidget {
             showCustomTimePicker(
               context: context,
               initialTime: TimeOfDay.now(),
-              initTimeZoneType: 1,
-              initTimeZone: "Asia/Shanghai",
-              initOffsetInHours: 0,
+              initTimeZoneType: TimeZoneType.fixedTime,
+              initTimeZoneData: const TimeZoneData(
+                name: "Asia/Shanghai",
+                abbreviation: "CST",
+                offset: 8,
+                isDst: false,
+              ),
+              // customTimeZoneDataList: [
+              //   TimeZoneData(
+              //     name: "Asia/Shanghai",
+              //     abbreviation: "CST",
+              //     offset: 8,
+              //     isDst: false,
+              //   ),
+              //   TimeZoneData(
+              //     name: "Asia/Shanghai2",
+              //     abbreviation: "CST",
+              //     offset: 8,
+              //     isDst: false,
+              //   ),
+              //   TimeZoneData(
+              //     name: "Asia/Shanghai3",
+              //     abbreviation: "CST",
+              //     offset: 8,
+              //     isDst: false,
+              //   )
+              // ],
               timeZoneHelpPressed: () {
                 print('timeZoneHelpPressed');
               },

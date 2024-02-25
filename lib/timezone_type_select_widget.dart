@@ -3,6 +3,7 @@
 // found in the LICENSE file.
 
 import 'package:flutter/material.dart';
+import 'package:time_picker_with_timezone/time_with_timezone.dart';
 import 'package:time_picker_with_timezone/timezone_select_widget.dart';
 import 'package:time_picker_with_timezone/timezone_util.dart';
 
@@ -10,8 +11,8 @@ class TimeZoneTypeSelectWidget extends StatefulWidget {
   const TimeZoneTypeSelectWidget({
     super.key,
     this.initTimeZoneType,
-    this.initTimeZone,
-    this.initOffsetInHours,
+    this.initTimeZoneData,
+    this.customTimeZoneDataList,
     this.fixedTimeTitle,
     this.fixedTimeSubTitle,
     this.timeZoneTimeTitle,
@@ -23,9 +24,9 @@ class TimeZoneTypeSelectWidget extends StatefulWidget {
     this.onTimeZoneTypeSelected,
   });
 
-  final int? initTimeZoneType;
-  final String? initTimeZone;
-  final int? initOffsetInHours;
+  final TimeZoneType? initTimeZoneType;
+  final TimeZoneData? initTimeZoneData;
+  final List<TimeZoneData>? customTimeZoneDataList;
 
   final String? fixedTimeTitle;
   final String? fixedTimeSubTitle;
@@ -37,7 +38,7 @@ class TimeZoneTypeSelectWidget extends StatefulWidget {
   final String? timeZoneSearchHint;
   final TextStyle? timeZoneSearchHintStyle;
 
-  final Function(int type, String? timezone, int? offsetInHours)? onTimeZoneTypeSelected;
+  final Function(TimeZoneType timeZoneType, TimeZoneData? timeZoneData)? onTimeZoneTypeSelected;
 
   @override
   State<TimeZoneTypeSelectWidget> createState() => _TimeZoneTypeSelectWidgetState();
@@ -70,31 +71,31 @@ class _TimeZoneTypeSelectWidgetState extends State<TimeZoneTypeSelectWidget> {
               widget.fixedTimeSubTitle ?? '时间不随时区变化',
               style: titleTextStyle,
             ),
-            selected: widget.initTimeZoneType == 0,
+            selected: widget.initTimeZoneType == TimeZoneType.fixedTime,
             visualDensity: visualDensity,
             contentPadding: contentPadding,
             leading: Visibility.maintain(
-              visible: widget.initTimeZoneType == 0,
+              visible: widget.initTimeZoneType == TimeZoneType.fixedTime,
               child: const Icon(Icons.done_rounded),
             ),
             onTap: () {
-              widget.onTimeZoneTypeSelected?.call(0, "", 0);
+              widget.onTimeZoneTypeSelected?.call(TimeZoneType.fixedTime, null);
               Navigator.of(context).pop();
             },
           ),
           ListTile(
             title: Text(widget.timeZoneTimeTitle ?? '时区时间'),
-            subtitle: widget.initTimeZone != null && widget.initTimeZone!.isNotEmpty && widget.initOffsetInHours != null
+            subtitle: widget.initTimeZoneData != null
                 ? Text(
-                    "${widget.initTimeZone}, UTC${TimezoneUtil.timeOffset2String(widget.initOffsetInHours)}",
+                    "${widget.initTimeZoneData!.name}, UTC${TimezoneUtil.timeOffset2String(widget.initTimeZoneData!.offset)}",
                     style: titleTextStyle,
                   )
                 : null,
-            selected: widget.initTimeZoneType == 1,
+            selected: widget.initTimeZoneType == TimeZoneType.timeZoneTime,
             visualDensity: visualDensity,
             contentPadding: contentPadding,
             leading: Visibility.maintain(
-              visible: widget.initTimeZoneType == 1,
+              visible: widget.initTimeZoneType == TimeZoneType.timeZoneTime,
               child: const Icon(Icons.done_rounded),
             ),
             onTap: () {
@@ -128,10 +129,10 @@ class _TimeZoneTypeSelectWidgetState extends State<TimeZoneTypeSelectWidget> {
                     ),
                     content: TimeZoneSelectWidget(
                       searchController: searchController,
-                      initTimeZone: widget.initTimeZone,
-                      initOffsetInHours: widget.initOffsetInHours,
-                      onTimeZoneSelected: (String timeZone, int offsetInHours) {
-                        widget.onTimeZoneTypeSelected?.call(1, timeZone, offsetInHours);
+                      initTimeZoneData: widget.initTimeZoneData,
+                      customTimeZoneDataList: widget.customTimeZoneDataList,
+                      onTimeZoneSelected: (TimeZoneData timeZoneData) {
+                        widget.onTimeZoneTypeSelected?.call(TimeZoneType.timeZoneTime, timeZoneData);
                         Navigator.of(context).pop();
                         //连续弹出两次到时间选择页面
                         Navigator.of(context).pop();
