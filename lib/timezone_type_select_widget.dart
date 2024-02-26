@@ -22,6 +22,8 @@ class TimeZoneTypeSelectWidget extends StatefulWidget {
     this.timeZoneSearchIcon,
     this.timeZoneSearchHintStyle,
     this.timeZoneSearchHint,
+    this.removeFromHistoryTitle,
+    this.removeFromHistoryContent,
     this.onTimeZoneTypeSelected,
   });
 
@@ -38,6 +40,8 @@ class TimeZoneTypeSelectWidget extends StatefulWidget {
 
   final Icon? timeZoneSearchIcon;
   final String? timeZoneSearchHint;
+  final String? removeFromHistoryTitle;
+  final String? removeFromHistoryContent;
   final TextStyle? timeZoneSearchHintStyle;
 
   final Function(TimeZoneType timeZoneType, TimeZoneData? timeZoneData)? onTimeZoneTypeSelected;
@@ -133,6 +137,8 @@ class _TimeZoneTypeSelectWidgetState extends State<TimeZoneTypeSelectWidget> {
                       searchController: searchController,
                       initTimeZoneData: widget.initTimeZoneData,
                       customTimeZoneDataList: widget.customTimeZoneDataList,
+                      removeFromHistoryTitle: widget.removeFromHistoryTitle,
+                      removeFromHistoryContent: widget.removeFromHistoryContent,
                       onTimeZoneSelected: (TimeZoneData timeZoneData) {
                         widget.onTimeZoneTypeSelected?.call(TimeZoneType.timeZoneTime, timeZoneData);
                         Navigator.of(context).pop();

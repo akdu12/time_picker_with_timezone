@@ -212,6 +212,8 @@ class _TimePickerHeader extends StatelessWidget {
     this.timezoneTimeTitle,
     this.timeZoneSearchIcon,
     this.timeZoneSearchHint,
+    this.removeFromHistoryTitle,
+    this.removeFromHistoryContent,
     this.timeZoneSearchHintStyle,
     this.onTimeZoneTypeSelected,
   });
@@ -232,6 +234,8 @@ class _TimePickerHeader extends StatelessWidget {
 
   final Icon? timeZoneSearchIcon;
   final String? timeZoneSearchHint;
+  final String? removeFromHistoryTitle;
+  final String? removeFromHistoryContent;
   final TextStyle? timeZoneSearchHintStyle;
   final Function(TimeZoneType timeZoneType, TimeZoneData? timeZoneData)? onTimeZoneTypeSelected;
 
@@ -263,6 +267,8 @@ class _TimePickerHeader extends StatelessWidget {
                 fixedTimeSubTitle: fixedTimeSubTitle,
                 timeZoneTimeTitle: timezoneTimeTitle,
                 timeZoneSearchHint: timeZoneSearchHint,
+                removeFromHistoryTitle: removeFromHistoryTitle,
+                removeFromHistoryContent: removeFromHistoryContent,
                 timeZoneSearchHintStyle: timeZoneSearchHintStyle,
                 timeZoneSearchIcon: timeZoneSearchIcon,
                 onTimeZoneTypeSelected: onTimeZoneTypeSelected,
@@ -312,6 +318,8 @@ class _TimePickerHeader extends StatelessWidget {
                 fixedTimeSubTitle: fixedTimeSubTitle,
                 timeZoneTimeTitle: timezoneTimeTitle,
                 timeZoneSearchHint: timeZoneSearchHint,
+                removeFromHistoryTitle: removeFromHistoryTitle,
+                removeFromHistoryContent: removeFromHistoryContent,
                 timeZoneSearchHintStyle: timeZoneSearchHintStyle,
                 timeZoneSearchIcon: timeZoneSearchIcon,
                 onTimeZoneTypeSelected: onTimeZoneTypeSelected,
@@ -1650,6 +1658,8 @@ class _TimePickerInput extends StatefulWidget {
     this.timezoneTimeTitle,
     this.timeZoneSearchIcon,
     this.timeZoneSearchHint,
+    this.removeFromHistoryTitle,
+    this.removeFromHistoryContent,
     this.timeZoneSearchHintStyle,
     this.onTimeZoneTypeSelected,
     this.restorationId,
@@ -1687,6 +1697,8 @@ class _TimePickerInput extends StatefulWidget {
 
   final Icon? timeZoneSearchIcon;
   final String? timeZoneSearchHint;
+  final String? removeFromHistoryTitle;
+  final String? removeFromHistoryContent;
   final TextStyle? timeZoneSearchHintStyle;
   final Function(TimeZoneType timeZoneType, TimeZoneData? timeZoneData)? onTimeZoneTypeSelected;
 
@@ -1852,6 +1864,8 @@ class _TimePickerInputState extends State<_TimePickerInput> with RestorationMixi
               fixedTimeSubTitle: widget.fixedTimeSubTitle,
               timeZoneTimeTitle: widget.timezoneTimeTitle,
               timeZoneSearchHint: widget.timeZoneSearchHint,
+              removeFromHistoryTitle: widget.removeFromHistoryTitle,
+              removeFromHistoryContent: widget.removeFromHistoryContent,
               timeZoneSearchHintStyle: widget.timeZoneSearchHintStyle,
               timeZoneSearchIcon: widget.timeZoneSearchIcon,
               onTimeZoneTypeSelected: widget.onTimeZoneTypeSelected,
@@ -1976,6 +1990,8 @@ class _TitleAndTimeZone extends StatefulWidget {
     this.timeZoneTimeTitle,
     this.timeZoneSearchIcon,
     this.timeZoneSearchHint,
+    this.removeFromHistoryTitle,
+    this.removeFromHistoryContent,
     this.timeZoneSearchHintStyle,
     this.onTimeZoneTypeSelected,
   });
@@ -1996,6 +2012,8 @@ class _TitleAndTimeZone extends StatefulWidget {
 
   final Icon? timeZoneSearchIcon;
   final String? timeZoneSearchHint;
+  final String? removeFromHistoryTitle;
+  final String? removeFromHistoryContent;
   final TextStyle? timeZoneSearchHintStyle;
   final Function(TimeZoneType timeZoneType, TimeZoneData? timeZoneData)? onTimeZoneTypeSelected;
 
@@ -2083,6 +2101,8 @@ class _TitleAndTimeZoneState extends State<_TitleAndTimeZone> {
                           timeZoneSearchIcon: widget.timeZoneSearchIcon,
                           timeZoneSearchHintStyle: widget.timeZoneSearchHintStyle,
                           timeZoneSearchHint: widget.timeZoneSearchHint,
+                          removeFromHistoryTitle: widget.removeFromHistoryTitle,
+                          removeFromHistoryContent: widget.removeFromHistoryContent,
                           onTimeZoneTypeSelected: (timeZoneType, timeZoneData) {
                             _timeZoneType = timeZoneType;
                             _timeZoneData = timeZoneData;
@@ -2411,6 +2431,8 @@ class TimePickerDialog extends StatefulWidget {
     this.timeZoneSearchIcon,
     this.timeZoneSearchHintStyle,
     this.timeZoneSearchHint,
+    this.removeFromHistoryTitle,
+    this.removeFromHistoryContent,
     this.errorInvalidText,
     this.hourLabelText,
     this.minuteLabelText,
@@ -2454,6 +2476,8 @@ class TimePickerDialog extends StatefulWidget {
 
   final Icon? timeZoneSearchIcon;
   final String? timeZoneSearchHint;
+  final String? removeFromHistoryTitle;
+  final String? removeFromHistoryContent;
   final TextStyle? timeZoneSearchHintStyle;
 
   /// Optionally provide your own validation error text.
@@ -2799,6 +2823,8 @@ class _TimePickerDialogState extends State<TimePickerDialog> with RestorationMix
                           fixedTimeSubTitle: widget.fixedTimeSubTitle,
                           timezoneTimeTitle: widget.timezoneTimeTitle,
                           timeZoneSearchHint: widget.timeZoneSearchHint,
+                          removeFromHistoryTitle: widget.removeFromHistoryTitle,
+                          removeFromHistoryContent: widget.removeFromHistoryContent,
                           timeZoneSearchHintStyle: widget.timeZoneSearchHintStyle,
                           timeZoneSearchIcon: widget.timeZoneSearchIcon,
                           onTimeZoneTypeSelected: (timeZoneType, timeZoneData) {
@@ -2854,6 +2880,8 @@ class _TimePicker extends StatefulWidget {
     this.timeZoneSearchIcon,
     this.timeZoneSearchHintStyle,
     this.timeZoneSearchHint,
+    this.removeFromHistoryTitle,
+    this.removeFromHistoryContent,
     this.onTimeZoneTypeSelected,
     this.cancelText,
     this.confirmText,
@@ -2912,6 +2940,8 @@ class _TimePicker extends StatefulWidget {
 
   final Icon? timeZoneSearchIcon;
   final String? timeZoneSearchHint;
+  final String? removeFromHistoryTitle;
+  final String? removeFromHistoryContent;
   final TextStyle? timeZoneSearchHintStyle;
   final Function(TimeZoneType timeZoneType, TimeZoneData? timeZoneData)? onTimeZoneTypeSelected;
 
@@ -3193,6 +3223,8 @@ class _TimePickerState extends State<_TimePicker> with RestorationMixin {
                     initTimeZoneData: widget.initTimeZoneData,
                     customTimeZoneDataList: widget.customTimeZoneDataList,
                     timeZoneSearchHint: widget.timeZoneSearchHint,
+                    removeFromHistoryTitle: widget.removeFromHistoryTitle,
+                    removeFromHistoryContent: widget.removeFromHistoryContent,
                     timeZoneSearchHintStyle: widget.timeZoneSearchHintStyle,
                     timeZoneSearchIcon: widget.timeZoneSearchIcon,
                     timeZoneTypeTitle: widget.timeZoneTypeTitle,
@@ -3237,6 +3269,8 @@ class _TimePickerState extends State<_TimePicker> with RestorationMixin {
                           initTimeZoneData: widget.initTimeZoneData,
                           customTimeZoneDataList: widget.customTimeZoneDataList,
                           timeZoneSearchHint: widget.timeZoneSearchHint,
+                          removeFromHistoryTitle: widget.removeFromHistoryTitle,
+                          removeFromHistoryContent: widget.removeFromHistoryContent,
                           timeZoneSearchHintStyle: widget.timeZoneSearchHintStyle,
                           timeZoneSearchIcon: widget.timeZoneSearchIcon,
                           timeZoneTypeTitle: widget.timeZoneTypeTitle,
@@ -3280,6 +3314,8 @@ class _TimePickerState extends State<_TimePicker> with RestorationMixin {
               fixedTimeSubTitle: widget.fixedTimeSubTitle,
               timezoneTimeTitle: widget.timezoneTimeTitle,
               timeZoneSearchHint: widget.timeZoneSearchHint,
+              removeFromHistoryTitle: widget.removeFromHistoryTitle,
+              removeFromHistoryContent: widget.removeFromHistoryContent,
               timeZoneSearchHintStyle: widget.timeZoneSearchHintStyle,
               timeZoneSearchIcon: widget.timeZoneSearchIcon,
               onTimeZoneTypeSelected: widget.onTimeZoneTypeSelected,
@@ -3433,6 +3469,8 @@ Future<TimeWithTimeZone?> showCustomTimePicker({
   String? timeZoneTimeTitle,
   Icon? timeZoneSearchIcon,
   String? timeZoneSearchHint,
+  String? removeFromHistoryTitle,
+  String? removeFromHistoryContent,
   TextStyle? timeZoneSearchHintStyle,
 }) async {
   assert(debugCheckHasMaterialLocalizations(context));
@@ -3457,6 +3495,8 @@ Future<TimeWithTimeZone?> showCustomTimePicker({
     timezoneTimeTitle: timeZoneTimeTitle,
     timeZoneSearchIcon: timeZoneSearchIcon,
     timeZoneSearchHint: timeZoneSearchHint,
+    removeFromHistoryTitle: removeFromHistoryTitle,
+    removeFromHistoryContent: removeFromHistoryContent,
     timeZoneSearchHintStyle: timeZoneSearchHintStyle,
     errorInvalidText: errorInvalidText,
     hourLabelText: hourLabelText,

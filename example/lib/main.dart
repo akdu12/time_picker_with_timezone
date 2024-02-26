@@ -58,6 +58,8 @@ class ExampleWidget extends StatelessWidget {
               // timeZoneSearchIcon: const Icon(Icons.search_rounded),
               // timeZoneSearchHint: "搜索时区",
               // timeZoneSearchHintStyle: const TextStyle(fontSize: 16),
+              // removeFromHistoryTitle: "移除历史记录",
+              // removeFromHistoryContent: "移除该条历史记录后，置顶将取消。",
             ).then((value) {
               print(value);
             });

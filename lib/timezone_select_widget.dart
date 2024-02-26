@@ -18,8 +18,12 @@ class TimeZoneSelectWidget extends StatefulWidget {
     this.initTimeZoneData,
     this.customTimeZoneDataList,
     this.onTimeZoneSelected,
+    this.removeFromHistoryTitle,
+    this.removeFromHistoryContent,
   });
 
+  final String? removeFromHistoryTitle;
+  final String? removeFromHistoryContent;
   final TextEditingController searchController;
 
   final TimeZoneData? initTimeZoneData;
@@ -86,7 +90,12 @@ class _TimeZoneSelectWidgetState extends State<TimeZoneSelectWidget> {
                   _handleSelect(timeZoneData);
                 },
                 onLongPress: (timeZoneData) async {
-                  final delete = await _handleLongPress(context, timeZoneData);
+                  final delete = await _handleLongPress(
+                    context,
+                    timeZoneData,
+                    widget.removeFromHistoryTitle,
+                    widget.removeFromHistoryContent,
+                  );
                   if (delete) {
                     setState(() {});
                   }
@@ -134,7 +143,12 @@ class _TimeZoneSelectWidgetState extends State<TimeZoneSelectWidget> {
                   _handleSelect(timeZoneData);
                 },
                 onLongPress: (timeZoneData) async {
-                  final delete = await _handleLongPress(context, timeZoneData);
+                  final delete = await _handleLongPress(
+                    context,
+                    timeZoneData,
+                    widget.removeFromHistoryTitle,
+                    widget.removeFromHistoryContent,
+                  );
                   if (delete) {
                     setState(() {});
                   }
@@ -220,22 +234,27 @@ class _TimeZoneSelectWidgetState extends State<TimeZoneSelectWidget> {
   }
 }
 
-Future<bool> _handleLongPress(BuildContext context, TimeZoneData timeZoneData) async {
+Future<bool> _handleLongPress(
+  BuildContext context,
+  TimeZoneData timeZoneData,
+  String? removeFromHistoryTitle,
+  String? removeFromHistoryContent,
+) async {
   return await showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text("Remove from history"),
-          content: Text("After remove ${timeZoneData.name} from history, it will not be displayed in the top history list."),
+          title: Text(removeFromHistoryTitle ?? "Remove from history"),
+          content: Text(removeFromHistoryContent ?? "After remove it from history, it will not be displayed in the top history list."),
           actions: <Widget>[
             TextButton(
-              child: const Text("Cancel"),
+              child: Text(MaterialLocalizations.of(context).cancelButtonLabel),
               onPressed: () {
                 Navigator.of(context).pop(false);
               },
             ),
             TextButton(
-              child: const Text("Remove"),
+              child: Text(MaterialLocalizations.of(context).okButtonLabel),
               onPressed: () async {
                 final SharedPreferences prefs = await SharedPreferences.getInstance();
                 final List<String> items = prefs.getStringList('selectedTimeZoneHistoryList') ?? [];
