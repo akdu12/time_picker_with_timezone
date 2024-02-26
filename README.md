@@ -14,6 +14,8 @@
 ### If you like this package, please like it on [pub.dev](https://pub.dev/packages/time_picker_with_timezone) and star it on [GitHub](https://github.com/lijianqiang12/time_picker_with_timezone).
 
 
+English | [中文](https://github.com/lijianqiang12/time_picker_with_timezone/blob/master/README.md)
+
 ## Features
 
 Adding time zone selection to the official Flutter time_picker component.

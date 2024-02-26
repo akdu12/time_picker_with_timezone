@@ -14,6 +14,8 @@
 ### 如果喜欢这个库, 欢迎点赞 [pub.dev](https://pub.dev/packages/time_picker_with_timezone) 或 [GitHub](https://github.com/lijianqiang12/time_picker_with_timezone).
 
 
+中文 | [English](https://github.com/lijianqiang12/time_picker_with_timezone/blob/master/README_zh_CN.md)
+
 ## 功能
 
 在Flutter官方time_picker组件上添加时区选择功能
