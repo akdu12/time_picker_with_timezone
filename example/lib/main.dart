@@ -35,7 +35,7 @@ class ExampleWidget extends StatelessWidget {
       body: Center(
         child: ElevatedButton(
           onPressed: () {
-            showCustomTimePicker(
+            showTimeWithTimeZonePicker(
               context: context,
               initialTime: TimeOfDay.now(),
               // enableTimeZone: true,

@@ -3437,7 +3437,7 @@ class _TimePickerState extends State<_TimePicker> with RestorationMixin {
 ///   typography, and shape of the time picker.
 /// * [DisplayFeatureSubScreen], which documents the specifics of how
 ///   [DisplayFeature]s can split the screen into sub-screens.
-Future<TimeWithTimeZone?> showCustomTimePicker({
+Future<TimeWithTimeZone?> showTimeWithTimeZonePicker({
   required BuildContext context,
   required TimeOfDay initialTime,
   TransitionBuilder? builder,

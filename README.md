@@ -53,7 +53,7 @@ flutter pub add time_picker_with_timezone
 ## Usage
 
 ```dart
-showCustomTimePicker(
+showTimeWithTimeZonePicker(
     context: context,
     initialTime: TimeOfDay.now(),
     // enableTimeZone: true,
