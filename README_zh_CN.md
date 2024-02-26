@@ -20,7 +20,7 @@
 
 在Flutter官方time_picker组件上添加时区选择功能
 
-## Screenshots
+## 截图
 
 <table>
     <tr>
