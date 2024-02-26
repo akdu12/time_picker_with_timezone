@@ -31,7 +31,6 @@ class TimeZoneSelectWidget extends StatefulWidget {
 }
 
 class _TimeZoneSelectWidgetState extends State<TimeZoneSelectWidget> {
-  // final visualDensity = const VisualDensity(horizontal: -4, vertical: -4);
   var searchText = "";
 
   void searchListener() {
@@ -76,17 +75,22 @@ class _TimeZoneSelectWidgetState extends State<TimeZoneSelectWidget> {
         if (historyList.contains(name)) {
           timeZoneHistoryListWidget.add(
             TimeZoneItemWidget(
-              timeZoneData: TimeZoneData(
-                name: name,
-                abbreviation: currentTimeZone.abbreviation,
-                offset: currentTimeZone.offset,
-                isDst: currentTimeZone.isDst,
-              ),
-              selected: name == widget.initTimeZoneData?.name,
-              onTap: (timeZoneData) {
-                _handleSelect(timeZoneData);
-              },
-            ),
+                timeZoneData: TimeZoneData(
+                  name: name,
+                  abbreviation: currentTimeZone.abbreviation,
+                  offset: currentTimeZone.offset,
+                  isDst: currentTimeZone.isDst,
+                ),
+                selected: name == widget.initTimeZoneData?.name,
+                onTap: (timeZoneData) {
+                  _handleSelect(timeZoneData);
+                },
+                onLongPress: (timeZoneData) async {
+                  final delete = await _handleLongPress(context, timeZoneData);
+                  if (delete) {
+                    setState(() {});
+                  }
+                }),
           );
           return;
         }
@@ -119,17 +123,22 @@ class _TimeZoneSelectWidgetState extends State<TimeZoneSelectWidget> {
         if (historyList.contains(element.name)) {
           timeZoneHistoryListWidget.add(
             TimeZoneItemWidget(
-              timeZoneData: TimeZoneData(
-                name: element.name,
-                abbreviation: element.abbreviation,
-                offset: element.offset,
-                isDst: element.isDst,
-              ),
-              selected: element.name == widget.initTimeZoneData?.name,
-              onTap: (timeZoneData) {
-                _handleSelect(timeZoneData);
-              },
-            ),
+                timeZoneData: TimeZoneData(
+                  name: element.name,
+                  abbreviation: element.abbreviation,
+                  offset: element.offset,
+                  isDst: element.isDst,
+                ),
+                selected: element.name == widget.initTimeZoneData?.name,
+                onTap: (timeZoneData) {
+                  _handleSelect(timeZoneData);
+                },
+                onLongPress: (timeZoneData) async {
+                  final delete = await _handleLongPress(context, timeZoneData);
+                  if (delete) {
+                    setState(() {});
+                  }
+                }),
           );
           continue;
         }
@@ -209,7 +218,37 @@ class _TimeZoneSelectWidgetState extends State<TimeZoneSelectWidget> {
       await prefs.setStringList('selectedTimeZoneHistoryList', items);
     }
   }
+}
 
+Future<bool> _handleLongPress(BuildContext context, TimeZoneData timeZoneData) async {
+  return await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text("Remove from history"),
+          content: Text("After remove ${timeZoneData.name} from history, it will not be displayed in the top history list."),
+          actions: <Widget>[
+            TextButton(
+              child: const Text("Cancel"),
+              onPressed: () {
+                Navigator.of(context).pop(false);
+              },
+            ),
+            TextButton(
+              child: const Text("Remove"),
+              onPressed: () async {
+                final SharedPreferences prefs = await SharedPreferences.getInstance();
+                final List<String> items = prefs.getStringList('selectedTimeZoneHistoryList') ?? [];
+                items.remove(timeZoneData.name);
+                await prefs.setStringList('selectedTimeZoneHistoryList', items);
+                if (context.mounted) {
+                  Navigator.of(context).pop(true);
+                }
+              },
+            ),
+          ],
+        );
+      });
 }
 
 //时区列表项
@@ -217,12 +256,14 @@ class TimeZoneItemWidget extends StatelessWidget {
   final TimeZoneData timeZoneData;
   final bool selected;
   final Function(TimeZoneData timeZoneData) onTap;
+  final Function(TimeZoneData timeZoneData)? onLongPress;
 
   const TimeZoneItemWidget({
     super.key,
     required this.timeZoneData,
     required this.selected,
     required this.onTap,
+    this.onLongPress,
   });
 
   @override
@@ -242,6 +283,9 @@ class TimeZoneItemWidget extends StatelessWidget {
       ),
       onTap: () {
         onTap.call(timeZoneData);
+      },
+      onLongPress: () {
+        onLongPress?.call(timeZoneData);
       },
     );
   }
