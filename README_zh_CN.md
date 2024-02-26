@@ -8,7 +8,7 @@
 [![license](https://img.shields.io/github/license/lijianqiang12/time_picker_with_timezone.svg)](https://github.com/lijianqiang12/time_picker_with_timezone/blob/master/LICENSE)
 <!-- [![codecov](https://codecov.io/gh/lijianqiang12/time_picker_with_timezone/branch/main/graph/badge.svg?token=NY1D6W88H2)](https://codecov.io/gh/lijianqiang12/time_picker_with_timezone) -->
 
-[![buy me a coffee](https://img.buymeacoffee.com/button-api/?text=Buy%20me%20a%20pizza&emoji=🍕&slug=lijianqiang12&button_colour=FF8838&font_colour=ffffff&font_family=Poppins&outline_colour=000000&coffee_colour=ffffff')](https://www.buymeacoffee.com/lijianqiang12)
+<!-- [![buy me a coffee](https://img.buymeacoffee.com/button-api/?text=Buy%20me%20a%20pizza&emoji=🍕&slug=lijianqiang12&button_colour=FF8838&font_colour=ffffff&font_family=Poppins&outline_colour=000000&coffee_colour=ffffff')](https://www.buymeacoffee.com/lijianqiang12) -->
 
 
 ### 如果喜欢这个库, 欢迎点赞 [pub.dev](https://pub.dev/packages/time_picker_with_timezone) 或 [GitHub](https://github.com/lijianqiang12/time_picker_with_timezone).
@@ -25,19 +25,19 @@
 <table>
     <tr>
         <th>
-            <img src="./screenshots/IMG_20240225_220931.jpg" width="250" title="选择时间">
+            <img src="https://github.com/lijianqiang12/time_picker_with_timezone/blob/master/screenshots/IMG_20240225_220931.jpg" width="250" title="选择时间">
             <p>选择时间</p>
         </th>
         <th>
-            <img src="./screenshots/IMG_20240225_220917.jpg" width="250" title="输入时间">
+            <img src="https://github.com/lijianqiang12/time_picker_with_timezone/blob/master/screenshots/IMG_20240225_220917.jpg" width="250" title="输入时间">
             <p>输入时间</p>
         </th>
         <th>
-            <img src="./screenshots/IMG_20240225_220858.jpg" width="250" title="选择时区类型">
+            <img src="https://github.com/lijianqiang12/time_picker_with_timezone/blob/master/screenshots/IMG_20240225_220858.jpg" width="250" title="选择时区类型">
             <p>选择时区类型</p>
         </th>
         <th>
-            <img src="./screenshots/IMG_20240225_220842.jpg" width="250" title="选择时区">
+            <img src="https://github.com/lijianqiang12/time_picker_with_timezone/blob/master/screenshots/IMG_20240225_220842.jpg" width="250" title="选择时区">
             <p>选择时区</p>
         </th>
     </tr>

@@ -1,6 +1,6 @@
 name: time_picker_with_timezone
 description: "TimePicker with TimeZoneSelector."
-version: 0.0.2
+version: 0.0.3
 homepage: https://github.com/lijianqiang12/time_picker_with_timezone
 repository: https://github.com/lijianqiang12/time_picker_with_timezone
 issue_tracker: https://github.com/lijianqiang12/time_picker_with_timezone/issues
