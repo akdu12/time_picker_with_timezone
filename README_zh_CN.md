@@ -11,27 +11,27 @@
 [![buy me a coffee](https://img.buymeacoffee.com/button-api/?text=Buy%20me%20a%20pizza&emoji=🍕&slug=lijianqiang12&button_colour=FF8838&font_colour=ffffff&font_family=Poppins&outline_colour=000000&coffee_colour=ffffff')](https://www.buymeacoffee.com/lijianqiang12)
 
 
-### If you like this package, please like it on [pub.dev](https://pub.dev/packages/time_picker_with_timezone) and star it on [GitHub](https://github.com/lijianqiang12/time_picker_with_timezone).
+### 如果喜欢这个库, 欢迎点赞 [pub.dev](https://pub.dev/packages/time_picker_with_timezone) 或 [GitHub](https://github.com/lijianqiang12/time_picker_with_timezone).
 
 
-## Features
+## 功能
 
-Adding time zone selection to the official Flutter time_picker component.
+在Flutter官方time_picker组件上添加时区选择功能
 
 ## Screenshots
-![Select time](./screenshots/IMG_20240225_220931.jpg){width=400 height=560}
-![Enter time](./screenshots/IMG_20240225_220917.jpg){width=400 height=320}
-![Choose timezone type](./screenshots/IMG_20240225_220858.jpg){width=400 height=560}
-![Choose timezone](./screenshots/IMG_20240225_220842.jpg){width=400 height=560}
+![选择时间](./screenshots/IMG_20240225_220931.jpg){width=400 height=560}
+![输入时间](./screenshots/IMG_20240225_220917.jpg){width=400 height=320}
+![选择时区类型](./screenshots/IMG_20240225_220858.jpg){width=400 height=560}
+![选择时区](./screenshots/IMG_20240225_220842.jpg){width=400 height=560}
 
 
-## Getting started
+## 开始
 
 ```shell
 flutter pub add time_picker_with_timezone
 ```
 
-## Usage
+## 使用
 
 ```dart
 showCustomTimePicker(
@@ -50,28 +50,28 @@ showCustomTimePicker(
     // timeZoneHelpPressed: () {
     //   print('timeZoneHelpPressed');
     // },
-    // timeZoneTypeTitle: "Time zone setting",
-    // fixedTimeTitle: "Fixed time",
-    // fixedTimeSubTitle: "Time does not vary from time to time",
-    // timeZoneTimeTitle: "Time zone time",
+    // timeZoneTypeTitle: "时区设置",
+    // fixedTimeTitle: "固定时间",
+    // fixedTimeSubTitle: "时间不随时区变化",
+    // timeZoneTimeTitle: "时区时间",
     // timeZoneSearchIcon: const Icon(Icons.search_rounded),
-    // timeZoneSearchHint: "Search time zone",
+    // timeZoneSearchHint: "搜索时区",
     // timeZoneSearchHintStyle: const TextStyle(fontSize: 16),
-    // removeFromHistoryTitle: "remove select history",
-    // removeFromHistoryContent: "When this history is removed, the top placement is canceled.",
+    // removeFromHistoryTitle: "移除历史记录",
+    // removeFromHistoryContent: "移除该条历史记录后，置顶将取消。",
 ).then((timeWithTimeZone) {
     print(timeWithTimeZone);
 });
 ```
 
-## About Me
+## 关于我
 
 - [Charles Lee](https://github.com/lijianqiang12)
 
-## Support
+## 支持
 
-- If you like this package, please like it on [pub.dev](https://pub.dev/packages/time_picker_with_timezone) and star it on [GitHub](https://github.com/lijianqiang12/time_picker_with_timezone).
+  - 如果喜欢这个库, 欢迎点赞 [pub.dev](https://pub.dev/packages/time_picker_with_timezone) 或 [GitHub](https://github.com/lijianqiang12/time_picker_with_timezone).
 
 ## License
 
-- The Scripts and Documentation in this project are released under the [BSD 3-Clause License](https://github.com/lijianqiang12/time_picker_with_timezone/blob/master/LICENSE)
+- 使用时请遵循 [BSD 3-Clause License](https://github.com/lijianqiang12/time_picker_with_timezone/blob/master/LICENSE)
