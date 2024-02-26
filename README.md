@@ -25,19 +25,19 @@ Adding time zone selection to the official Flutter time_picker component.
 <table>
     <tr>
         <th>
-            <img src="./screenshots/IMG_20240225_220931.webp" width="250" title="Select time">
+            <img src="https://raw.githubusercontent.com/lijianqiang12/time_picker_with_timezone/master/screenshots/IMG_20240225_220931.webp" width="250" title="Select time">
             <p>Select time</p>
         </th>
         <th>
-            <img src="./screenshots/IMG_20240225_220917.webp" width="250" title="Enter time">
+            <img src="https://raw.githubusercontent.com/lijianqiang12/time_picker_with_timezone/master/screenshots/IMG_20240225_220917.webp" width="250" title="Enter time">
             <p>Enter time</p>
         </th>
         <th>
-            <img src="./screenshots/IMG_20240225_220858.webp" width="250" title="Choose timezone type">
+            <img src="https://raw.githubusercontent.com/lijianqiang12/time_picker_with_timezone/master/screenshots/IMG_20240225_220858.webp" width="250" title="Choose timezone type">
             <p>Choose timezone type</p>
         </th>
         <th>
-            <img src="./screenshots/IMG_20240225_220842.webp" width="250" title="Choose timezone">
+            <img src="https://raw.githubusercontent.com/lijianqiang12/time_picker_with_timezone/master/screenshots/IMG_20240225_220842.webp" width="250" title="Choose timezone">
             <p>Choose timezone</p>
         </th>
     </tr>

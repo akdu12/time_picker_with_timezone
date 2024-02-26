@@ -25,19 +25,19 @@
 <table>
     <tr>
         <th>
-            <img src="./screenshots/IMG_20240225_220931.webp" width="250" title="选择时间">
+            <img src="https://raw.githubusercontent.com/lijianqiang12/time_picker_with_timezone/master/screenshots/IMG_20240225_220931.webp" width="250" title="选择时间">
             <p>选择时间</p>
         </th>
         <th>
-            <img src="./screenshots/IMG_20240225_220917.webp" width="250" title="输入时间">
+            <img src="https://raw.githubusercontent.com/lijianqiang12/time_picker_with_timezone/master/screenshots/IMG_20240225_220917.webp" width="250" title="输入时间">
             <p>输入时间</p>
         </th>
         <th>
-            <img src="./screenshots/IMG_20240225_220858.webp" width="250" title="选择时区类型">
+            <img src="https://raw.githubusercontent.com/lijianqiang12/time_picker_with_timezone/master/screenshots/IMG_20240225_220858.webp" width="250" title="选择时区类型">
             <p>选择时区类型</p>
         </th>
         <th>
-            <img src="./screenshots/IMG_20240225_220842.webp" width="250" title="选择时区">
+            <img src="https://raw.githubusercontent.com/lijianqiang12/time_picker_with_timezone/master/screenshots/IMG_20240225_220842.webp" width="250" title="选择时区">
             <p>选择时区</p>
         </th>
     </tr>
