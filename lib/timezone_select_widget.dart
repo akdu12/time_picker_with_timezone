@@ -31,7 +31,7 @@ class TimeZoneSelectWidget extends StatefulWidget {
 }
 
 class _TimeZoneSelectWidgetState extends State<TimeZoneSelectWidget> {
-  final visualDensity = const VisualDensity(horizontal: -4, vertical: -4);
+  // final visualDensity = const VisualDensity(horizontal: -4, vertical: -4);
   var searchText = "";
 
   void searchListener() {
@@ -75,7 +75,7 @@ class _TimeZoneSelectWidgetState extends State<TimeZoneSelectWidget> {
 
         if (historyList.contains(name)) {
           timeZoneHistoryListWidget.add(
-            _buildTimeZoneItemWidget(
+            TimeZoneItemWidget(
               timeZoneData: TimeZoneData(
                 name: name,
                 abbreviation: currentTimeZone.abbreviation,
@@ -92,7 +92,7 @@ class _TimeZoneSelectWidgetState extends State<TimeZoneSelectWidget> {
         }
 
         timeZoneListWidget.add(
-          _buildTimeZoneItemWidget(
+          TimeZoneItemWidget(
             timeZoneData: TimeZoneData(
               name: name,
               abbreviation: currentTimeZone.abbreviation,
@@ -118,7 +118,7 @@ class _TimeZoneSelectWidgetState extends State<TimeZoneSelectWidget> {
 
         if (historyList.contains(element.name)) {
           timeZoneHistoryListWidget.add(
-            _buildTimeZoneItemWidget(
+            TimeZoneItemWidget(
               timeZoneData: TimeZoneData(
                 name: element.name,
                 abbreviation: element.abbreviation,
@@ -135,7 +135,7 @@ class _TimeZoneSelectWidgetState extends State<TimeZoneSelectWidget> {
         }
 
         timeZoneListWidget.add(
-          _buildTimeZoneItemWidget(
+          TimeZoneItemWidget(
             timeZoneData: element,
             selected: element.name == widget.initTimeZoneData?.name,
             onTap: (timeZoneData) {
@@ -158,7 +158,7 @@ class _TimeZoneSelectWidgetState extends State<TimeZoneSelectWidget> {
     if (widget.initTimeZoneData != null) {
       timeZoneListWidget.insert(
         0,
-        _buildTimeZoneItemWidget(
+        TimeZoneItemWidget(
           timeZoneData: widget.initTimeZoneData!,
           selected: true,
           onTap: (timeZoneData) {
@@ -210,8 +210,23 @@ class _TimeZoneSelectWidgetState extends State<TimeZoneSelectWidget> {
     }
   }
 
-  //创建时区列表项
-  Widget _buildTimeZoneItemWidget({required TimeZoneData timeZoneData, required bool selected, required Function(TimeZoneData timeZoneData) onTap}) {
+}
+
+//时区列表项
+class TimeZoneItemWidget extends StatelessWidget {
+  final TimeZoneData timeZoneData;
+  final bool selected;
+  final Function(TimeZoneData timeZoneData) onTap;
+
+  const TimeZoneItemWidget({
+    super.key,
+    required this.timeZoneData,
+    required this.selected,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
     return ListTile(
       title: Text("${timeZoneData.abbreviation}, UTC${TimezoneUtil.timeOffset2String(timeZoneData.offset)}${timeZoneData.isDst ? " DST" : ""}"),
       subtitle: Text(
@@ -219,7 +234,7 @@ class _TimeZoneSelectWidgetState extends State<TimeZoneSelectWidget> {
         style: const TextStyle(fontSize: 12),
       ),
       selected: selected,
-      visualDensity: visualDensity,
+      visualDensity: const VisualDensity(horizontal: -4, vertical: -4),
       contentPadding: const EdgeInsets.symmetric(horizontal: 24),
       trailing: Visibility.maintain(
         visible: selected,
