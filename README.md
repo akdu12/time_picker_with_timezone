@@ -19,10 +19,27 @@
 Adding time zone selection to the official Flutter time_picker component.
 
 ## Screenshots
-![Select time](./screenshots/IMG_20240225_220931.jpg){width=400 height=560}
-![Enter time](./screenshots/IMG_20240225_220917.jpg){width=400 height=320}
-![Choose timezone type](./screenshots/IMG_20240225_220858.jpg){width=400 height=560}
-![Choose timezone](./screenshots/IMG_20240225_220842.jpg){width=400 height=560}
+
+<table>
+    <tr>
+        <th>
+            <img src="./screenshots/IMG_20240225_220931.jpg" width="250" title="Select time">
+            <p>Select time</p>
+        </th>
+        <th>
+            <img src="./screenshots/IMG_20240225_220917.jpg" width="250" title="Enter time">
+            <p>Enter time</p>
+        </th>
+        <th>
+            <img src="./screenshots/IMG_20240225_220858.jpg" width="250" title="Choose timezone type">
+            <p>Choose timezone type</p>
+        </th>
+        <th>
+            <img src="./screenshots/IMG_20240225_220842.jpg" width="250" title="Choose timezone">
+            <p>Choose timezone</p>
+        </th>
+    </tr>
+</table>
 
 
 ## Getting started
@@ -63,6 +80,9 @@ showCustomTimePicker(
     print(timeWithTimeZone);
 });
 ```
+
+Check out the example app to get the full code for the above [examples](https://github.com/lijianqiang12/time_picker_with_timezone/blob/master/example/lib/main.dart).
+
 
 ## About Me
 

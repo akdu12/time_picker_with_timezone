@@ -19,10 +19,27 @@
 在Flutter官方time_picker组件上添加时区选择功能
 
 ## Screenshots
-![选择时间](./screenshots/IMG_20240225_220931.jpg){width=400 height=560}
-![输入时间](./screenshots/IMG_20240225_220917.jpg){width=400 height=320}
-![选择时区类型](./screenshots/IMG_20240225_220858.jpg){width=400 height=560}
-![选择时区](./screenshots/IMG_20240225_220842.jpg){width=400 height=560}
+
+<table>
+    <tr>
+        <th>
+            <img src="./screenshots/IMG_20240225_220931.jpg" width="250" title="选择时间">
+            <p>选择时间</p>
+        </th>
+        <th>
+            <img src="./screenshots/IMG_20240225_220917.jpg" width="250" title="输入时间">
+            <p>输入时间</p>
+        </th>
+        <th>
+            <img src="./screenshots/IMG_20240225_220858.jpg" width="250" title="选择时区类型">
+            <p>选择时区类型</p>
+        </th>
+        <th>
+            <img src="./screenshots/IMG_20240225_220842.jpg" width="250" title="选择时区">
+            <p>选择时区</p>
+        </th>
+    </tr>
+</table>
 
 
 ## 开始
@@ -64,6 +81,9 @@ showCustomTimePicker(
 });
 ```
 
+完整代码请查看 [examples](https://github.com/lijianqiang12/time_picker_with_timezone/blob/master/example/lib/main.dart).
+
+
 ## 关于我
 
 - [Charles Lee](https://github.com/lijianqiang12)
@@ -72,6 +92,6 @@ showCustomTimePicker(
 
   - 如果喜欢这个库, 欢迎点赞 [pub.dev](https://pub.dev/packages/time_picker_with_timezone) 或 [GitHub](https://github.com/lijianqiang12/time_picker_with_timezone).
 
-## License
+## 许可证
 
 - 使用时请遵循 [BSD 3-Clause License](https://github.com/lijianqiang12/time_picker_with_timezone/blob/master/LICENSE)
