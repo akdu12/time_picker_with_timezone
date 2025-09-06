@@ -1,4 +1,8 @@
 
+# 0.0.9
+
+* Adapt ohos platform
+
 # 0.0.8
 
 * Update dependencies and fix compatibility issues
