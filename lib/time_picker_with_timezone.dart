@@ -372,14 +372,14 @@ class _HourMinuteControl extends StatelessWidget {
     final Color backgroundColor = timePickerTheme.hourMinuteColor ?? defaultTheme.hourMinuteColor;
     final ShapeBorder shape = timePickerTheme.hourMinuteShape ?? defaultTheme.hourMinuteShape;
 
-    final Set<MaterialState> states = <MaterialState>{
-      if (isSelected) MaterialState.selected,
+    final Set<WidgetState> states = <WidgetState>{
+      if (isSelected) WidgetState.selected,
     };
-    final Color effectiveTextColor = MaterialStateProperty.resolveAs<Color>(
+    final Color effectiveTextColor = WidgetStateProperty.resolveAs<Color>(
       _TimePickerModel.themeOf(context).hourMinuteTextColor ?? _TimePickerModel.defaultThemeOf(context).hourMinuteTextColor,
       states,
     );
-    final TextStyle effectiveStyle = MaterialStateProperty.resolveAs<TextStyle>(
+    final TextStyle effectiveStyle = WidgetStateProperty.resolveAs<TextStyle>(
       timePickerTheme.hourMinuteTextStyle ?? defaultTheme.hourMinuteTextStyle,
       states,
     ).copyWith(color: effectiveTextColor);
@@ -1985,7 +1985,6 @@ class _TimePickerInputState extends State<_TimePickerInput> with RestorationMixi
 
 class _TitleAndTimeZone extends StatefulWidget {
   const _TitleAndTimeZone({
-    super.key,
     required this.helpText,
     this.enableTimeZone,
     this.timeZoneShowType,
