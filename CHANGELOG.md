@@ -1,4 +1,9 @@
 
+# 0.0.8
+
+* Update dependencies and fix compatibility issues
+* Improve stability and performance
+
 # 0.0.7
 
 * Fit ohos platform

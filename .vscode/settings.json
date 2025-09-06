@@ -1,4 +1,4 @@
 {
-	"dart.flutterSdkPath": "/Users/charles/development/flutter",
-    "cmake.configureOnOpen": false
+  "dart.flutterSdkPath": ".fvm/versions/3.32.4",
+  "cmake.configureOnOpen": false
 }
