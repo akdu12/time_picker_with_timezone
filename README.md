@@ -1,4 +1,4 @@
-# AnimatedToggleSwitch
+# TimePickerWithTimezone
 
 [![pub.dev](https://img.shields.io/pub/v/time_picker_with_timezone.svg?style=flat?logo=dart)](https://pub.dev/packages/time_picker_with_timezone)
 [![github](https://img.shields.io/static/v1?label=platform&message=flutter&color=1ebbfd)](https://github.com/lijianqiang12/time_picker_with_timezone)

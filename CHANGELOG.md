@@ -1,4 +1,8 @@
 
+# 0.1.0
+
+* Fix readme title error
+
 # 0.0.9
 
 * Adapt ohos platform
