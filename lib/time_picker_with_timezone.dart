@@ -1886,93 +1886,96 @@ class _TimePickerInputState extends State<_TimePickerInput> with RestorationMixi
             ),
           ),
           //hour and minute textField
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              //am/pm
-              if (!use24HourDials && timeOfDayFormat == TimeOfDayFormat.a_space_h_colon_mm) ...<Widget>[
-                Padding(
-                  padding: const EdgeInsetsDirectional.only(end: 12),
-                  child: _DayPeriodControl(onPeriodChanged: _handleDayPeriodChanged),
-                ),
-              ],
-              Expanded(
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  // Hour/minutes should not change positions in RTL locales.
-                  textDirection: TextDirection.ltr,
-                  children: <Widget>[
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Padding(
-                            padding: const EdgeInsets.only(bottom: 10),
-                            child: _HourTextField(
-                              restorationId: 'hour_text_field',
-                              selectedTime: _selectedTime.value,
-                              style: hourMinuteStyle,
-                              autofocus: widget.autofocusHour,
-                              inputAction: TextInputAction.next,
-                              validator: _validateHour,
-                              onSavedSubmitted: _handleHourSavedSubmitted,
-                              onChanged: _handleHourChanged,
-                              hourLabelText: widget.hourLabelText,
-                            ),
-                          ),
-                          if (!hourHasError.value && !minuteHasError.value)
-                            ExcludeSemantics(
-                              child: Text(
-                                widget.hourLabelText ?? MaterialLocalizations.of(context).timePickerHourLabel,
-                                style: theme.textTheme.bodySmall,
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
+          SizedBox(
+            width: 300,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                //am/pm
+                if (!use24HourDials && timeOfDayFormat == TimeOfDayFormat.a_space_h_colon_mm) ...<Widget>[
+                  Padding(
+                    padding: const EdgeInsetsDirectional.only(end: 12),
+                    child: _DayPeriodControl(onPeriodChanged: _handleDayPeriodChanged),
+                  ),
+                ],
+                Expanded(
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    // Hour/minutes should not change positions in RTL locales.
+                    textDirection: TextDirection.ltr,
+                    children: <Widget>[
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 10),
+                              child: _HourTextField(
+                                restorationId: 'hour_text_field',
+                                selectedTime: _selectedTime.value,
+                                style: hourMinuteStyle,
+                                autofocus: widget.autofocusHour,
+                                inputAction: TextInputAction.next,
+                                validator: _validateHour,
+                                onSavedSubmitted: _handleHourSavedSubmitted,
+                                onChanged: _handleHourChanged,
+                                hourLabelText: widget.hourLabelText,
                               ),
                             ),
-                        ],
+                            if (!hourHasError.value && !minuteHasError.value)
+                              ExcludeSemantics(
+                                child: Text(
+                                  widget.hourLabelText ?? MaterialLocalizations.of(context).timePickerHourLabel,
+                                  style: theme.textTheme.bodySmall,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ),
+                          ],
+                        ),
                       ),
-                    ),
-                    _StringFragment(timeOfDayFormat: timeOfDayFormat),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Padding(
-                            padding: const EdgeInsets.only(bottom: 10),
-                            child: _MinuteTextField(
-                              restorationId: 'minute_text_field',
-                              selectedTime: _selectedTime.value,
-                              style: hourMinuteStyle,
-                              autofocus: widget.autofocusMinute,
-                              inputAction: TextInputAction.done,
-                              validator: _validateMinute,
-                              onSavedSubmitted: _handleMinuteSavedSubmitted,
-                              minuteLabelText: widget.minuteLabelText,
-                            ),
-                          ),
-                          if (!hourHasError.value && !minuteHasError.value)
-                            ExcludeSemantics(
-                              child: Text(
-                                widget.minuteLabelText ?? MaterialLocalizations.of(context).timePickerMinuteLabel,
-                                style: theme.textTheme.bodySmall,
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
+                      _StringFragment(timeOfDayFormat: timeOfDayFormat),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 10),
+                              child: _MinuteTextField(
+                                restorationId: 'minute_text_field',
+                                selectedTime: _selectedTime.value,
+                                style: hourMinuteStyle,
+                                autofocus: widget.autofocusMinute,
+                                inputAction: TextInputAction.done,
+                                validator: _validateMinute,
+                                onSavedSubmitted: _handleMinuteSavedSubmitted,
+                                minuteLabelText: widget.minuteLabelText,
                               ),
                             ),
-                        ],
+                            if (!hourHasError.value && !minuteHasError.value)
+                              ExcludeSemantics(
+                                child: Text(
+                                  widget.minuteLabelText ?? MaterialLocalizations.of(context).timePickerMinuteLabel,
+                                  style: theme.textTheme.bodySmall,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ),
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-              //am/pm
-              if (!use24HourDials && timeOfDayFormat != TimeOfDayFormat.a_space_h_colon_mm) ...<Widget>[
-                Padding(
-                  padding: const EdgeInsetsDirectional.only(start: 12),
-                  child: _DayPeriodControl(onPeriodChanged: _handleDayPeriodChanged),
-                ),
+                //am/pm
+                if (!use24HourDials && timeOfDayFormat != TimeOfDayFormat.a_space_h_colon_mm) ...<Widget>[
+                  Padding(
+                    padding: const EdgeInsetsDirectional.only(start: 12),
+                    child: _DayPeriodControl(onPeriodChanged: _handleDayPeriodChanged),
+                  ),
+                ],
               ],
-            ],
+            ),
           ),
           if (hourHasError.value || minuteHasError.value)
             Text(
@@ -2155,6 +2158,7 @@ class _TitleAndTimeZoneState extends State<_TitleAndTimeZone> {
                             : TimezoneUtil.timeZoneString(_timeZoneData!, widget.timeZoneShowType!),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
+                        style: TextStyle(fontSize: 20),
                       ),
                     ),
                     const Icon(Icons.keyboard_arrow_down_rounded, size: 16),
@@ -2549,16 +2553,16 @@ class _TimePickerDialogState extends State<TimePickerDialog> with RestorationMix
   late final RestorableEnumN<Orientation> _orientation = RestorableEnumN<Orientation>(widget.orientation, values: Orientation.values);
 
   // Base sizes
-  static const Size _kTimePickerPortraitSize = Size(310, 468);
+  static const Size _kTimePickerPortraitSize = Size(500, 468);
   static const Size _kTimePickerLandscapeSize = Size(524, 342);
   static const Size _kTimePickerLandscapeSizeM2 = Size(508, 300);
-  static const Size _kTimePickerInputSize = Size(312, 216);
+  static const Size _kTimePickerInputSize = Size(450, 216);
 
   // Absolute minimum dialog sizes, which is the point at which it begins
   // scrolling to fit everything in.
-  static const Size _kTimePickerMinPortraitSize = Size(238, 326);
-  static const Size _kTimePickerMinLandscapeSize = Size(416, 248);
-  static const Size _kTimePickerMinInputSize = Size(312, 196);
+  static const Size _kTimePickerMinPortraitSize = Size(500, 326);
+  static const Size _kTimePickerMinLandscapeSize = Size(500, 248);
+  static const Size _kTimePickerMinInputSize = Size(500, 196);
 
   TimeZoneType? _timeZoneType;
   TimeZoneData? _timeZoneData;
