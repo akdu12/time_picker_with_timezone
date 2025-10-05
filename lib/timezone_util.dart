@@ -11,7 +11,7 @@ class TimezoneUtil {
     if (offset == null) return "";
     String offsetStr = "";
 
-    int offsetInHours = offset ~/ 1000 ~/ 3600;
+    int offsetInHours = offset;
     if (offsetInHours >= 10) {
       offsetStr += "+$offsetInHours";
     } else if (offsetInHours >= 0) {

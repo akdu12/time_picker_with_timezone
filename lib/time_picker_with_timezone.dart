@@ -2158,7 +2158,7 @@ class _TitleAndTimeZoneState extends State<_TitleAndTimeZone> {
                             : TimezoneUtil.timeZoneString(_timeZoneData!, widget.timeZoneShowType!),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: TextStyle(fontSize: 20),
+                        style: const TextStyle(fontSize: 20),
                       ),
                     ),
                     const Icon(Icons.keyboard_arrow_down_rounded, size: 16),
