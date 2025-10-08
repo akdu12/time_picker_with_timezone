@@ -44,10 +44,12 @@ class TimeZoneTypeSelectWidget extends StatefulWidget {
   final String? removeFromHistoryContent;
   final TextStyle? timeZoneSearchHintStyle;
 
-  final Function(TimeZoneType timeZoneType, TimeZoneData? timeZoneData)? onTimeZoneTypeSelected;
+  final Function(TimeZoneType timeZoneType, TimeZoneData? timeZoneData)?
+      onTimeZoneTypeSelected;
 
   @override
-  State<TimeZoneTypeSelectWidget> createState() => _TimeZoneTypeSelectWidgetState();
+  State<TimeZoneTypeSelectWidget> createState() =>
+      _TimeZoneTypeSelectWidgetState();
 }
 
 class _TimeZoneTypeSelectWidgetState extends State<TimeZoneTypeSelectWidget> {
@@ -93,7 +95,8 @@ class _TimeZoneTypeSelectWidgetState extends State<TimeZoneTypeSelectWidget> {
             title: Text(widget.timeZoneTimeTitle ?? 'Time zone time'),
             subtitle: widget.initTimeZoneData != null
                 ? Text(
-                    TimezoneUtil.timeZoneString(widget.initTimeZoneData!, widget.timeZoneShowType!),
+                    TimezoneUtil.timeZoneString(
+                        widget.initTimeZoneData!, widget.timeZoneShowType!),
                     style: titleTextStyle,
                   )
                 : null,
@@ -110,7 +113,8 @@ class _TimeZoneTypeSelectWidgetState extends State<TimeZoneTypeSelectWidget> {
                 barrierColor: Colors.transparent, //多个barrier叠加后背景太深，不好看
                 builder: (BuildContext context) {
                   return AlertDialog(
-                    insetPadding: const EdgeInsets.symmetric(horizontal: 18, vertical: 24),
+                    insetPadding: const EdgeInsets.symmetric(
+                        horizontal: 18, vertical: 24),
                     iconPadding: const EdgeInsets.only(top: 8),
                     // titlePadding: const EdgeInsets.only(top: 8),
                     contentPadding: EdgeInsets.zero,
@@ -118,14 +122,16 @@ class _TimeZoneTypeSelectWidgetState extends State<TimeZoneTypeSelectWidget> {
                     icon: Row(
                       children: [
                         const SizedBox(width: 20),
-                        widget.timeZoneSearchIcon ?? const Icon(Icons.search_rounded),
+                        widget.timeZoneSearchIcon ??
+                            const Icon(Icons.search_rounded),
                         const SizedBox(width: 8),
                         Expanded(
                           child: TextField(
                             style: widget.timeZoneSearchHintStyle,
                             controller: searchController,
                             decoration: InputDecoration(
-                              hintText: widget.timeZoneSearchHint ?? 'Search for time zone',
+                              hintText: widget.timeZoneSearchHint ??
+                                  'Search for time zone',
                               border: InputBorder.none,
                             ),
                           ),
@@ -140,7 +146,8 @@ class _TimeZoneTypeSelectWidgetState extends State<TimeZoneTypeSelectWidget> {
                       removeFromHistoryTitle: widget.removeFromHistoryTitle,
                       removeFromHistoryContent: widget.removeFromHistoryContent,
                       onTimeZoneSelected: (TimeZoneData timeZoneData) {
-                        widget.onTimeZoneTypeSelected?.call(TimeZoneType.timeZoneTime, timeZoneData);
+                        widget.onTimeZoneTypeSelected
+                            ?.call(TimeZoneType.timeZoneTime, timeZoneData);
                         Navigator.of(context).pop();
                         //连续弹出两次到时间选择页面
                         Navigator.of(context).pop();
@@ -148,7 +155,8 @@ class _TimeZoneTypeSelectWidgetState extends State<TimeZoneTypeSelectWidget> {
                     ),
                     actions: <Widget>[
                       TextButton(
-                        child: Text(MaterialLocalizations.of(context).cancelButtonLabel),
+                        child: Text(MaterialLocalizations.of(context)
+                            .cancelButtonLabel),
                         onPressed: () {
                           Navigator.of(context).pop();
                         },

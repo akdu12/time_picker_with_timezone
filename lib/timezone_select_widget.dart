@@ -62,17 +62,27 @@ class _TimeZoneSelectWidgetState extends State<TimeZoneSelectWidget> {
 
     //已选择过的历史数据
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final List<String> historyList = prefs.getStringList('selectedTimeZoneHistoryList') ?? [];
+    final List<String> historyList =
+        prefs.getStringList('selectedTimeZoneHistoryList') ?? [];
 
     if (widget.customTimeZoneDataList == null) {
       tz.timeZoneDatabase.locations.forEach((name, location) {
         final currentTimeZone = location.currentTimeZone;
 
-        if (searchText.isNotEmpty && !name.toLowerCase().contains(searchText.toLowerCase()) && !currentTimeZone.abbreviation.toLowerCase().contains(searchText.toLowerCase())) {
+        if (searchText.isNotEmpty &&
+            !name.toLowerCase().contains(searchText.toLowerCase()) &&
+            !currentTimeZone.abbreviation
+                .toLowerCase()
+                .contains(searchText.toLowerCase())) {
           return;
         }
 
-        if (widget.initTimeZoneData == TimeZoneData(name: name, abbreviation: currentTimeZone.abbreviation, offset: currentTimeZone.offset, isDst: currentTimeZone.isDst)) {
+        if (widget.initTimeZoneData ==
+            TimeZoneData(
+                name: name,
+                abbreviation: currentTimeZone.abbreviation,
+                offset: currentTimeZone.offset,
+                isDst: currentTimeZone.isDst)) {
           return;
         }
 
@@ -121,7 +131,11 @@ class _TimeZoneSelectWidgetState extends State<TimeZoneSelectWidget> {
       });
     } else {
       for (var element in widget.customTimeZoneDataList!) {
-        if (searchText.isNotEmpty && !element.name.toLowerCase().contains(searchText.toLowerCase()) && !element.abbreviation.toLowerCase().contains(searchText.toLowerCase())) {
+        if (searchText.isNotEmpty &&
+            !element.name.toLowerCase().contains(searchText.toLowerCase()) &&
+            !element.abbreviation
+                .toLowerCase()
+                .contains(searchText.toLowerCase())) {
           continue;
         }
 
@@ -226,7 +240,8 @@ class _TimeZoneSelectWidgetState extends State<TimeZoneSelectWidget> {
   void _handleSelect(TimeZoneData timeZoneData) async {
     widget.onTimeZoneSelected?.call(timeZoneData);
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final List<String> items = prefs.getStringList('selectedTimeZoneHistoryList') ?? [];
+    final List<String> items =
+        prefs.getStringList('selectedTimeZoneHistoryList') ?? [];
     if (!items.contains(timeZoneData.name)) {
       items.add(timeZoneData.name);
       await prefs.setStringList('selectedTimeZoneHistoryList', items);
@@ -245,7 +260,8 @@ Future<bool> _handleLongPress(
       builder: (BuildContext context) {
         return AlertDialog(
           title: Text(removeFromHistoryTitle ?? "Remove from history"),
-          content: Text(removeFromHistoryContent ?? "After remove it from history, it will not be displayed in the top history list."),
+          content: Text(removeFromHistoryContent ??
+              "After remove it from history, it will not be displayed in the top history list."),
           actions: <Widget>[
             TextButton(
               child: Text(MaterialLocalizations.of(context).cancelButtonLabel),
@@ -256,8 +272,10 @@ Future<bool> _handleLongPress(
             TextButton(
               child: Text(MaterialLocalizations.of(context).okButtonLabel),
               onPressed: () async {
-                final SharedPreferences prefs = await SharedPreferences.getInstance();
-                final List<String> items = prefs.getStringList('selectedTimeZoneHistoryList') ?? [];
+                final SharedPreferences prefs =
+                    await SharedPreferences.getInstance();
+                final List<String> items =
+                    prefs.getStringList('selectedTimeZoneHistoryList') ?? [];
                 items.remove(timeZoneData.name);
                 await prefs.setStringList('selectedTimeZoneHistoryList', items);
                 if (context.mounted) {
@@ -288,7 +306,8 @@ class TimeZoneItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      title: Text("${timeZoneData.abbreviation}, UTC${TimezoneUtil.timeOffset2String(timeZoneData.offset)}${timeZoneData.isDst ? " DST" : ""}"),
+      title: Text(
+          "${timeZoneData.abbreviation}, UTC${TimezoneUtil.timeOffset2String(timeZoneData.offset)}${timeZoneData.isDst ? " DST" : ""}"),
       subtitle: Text(
         timeZoneData.name,
         style: const TextStyle(fontSize: 12),

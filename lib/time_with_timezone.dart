@@ -43,11 +43,16 @@ class TimeZoneData {
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-    return other is TimeZoneData && other.name == name && other.abbreviation == abbreviation && other.offset == offset && other.isDst == isDst;
+    return other is TimeZoneData &&
+        other.name == name &&
+        other.abbreviation == abbreviation &&
+        other.offset == offset &&
+        other.isDst == isDst;
   }
 
   @override
-  int get hashCode => name.hashCode ^ abbreviation.hashCode ^ offset.hashCode ^ isDst.hashCode;
+  int get hashCode =>
+      name.hashCode ^ abbreviation.hashCode ^ offset.hashCode ^ isDst.hashCode;
 
   @override
   String toString() {

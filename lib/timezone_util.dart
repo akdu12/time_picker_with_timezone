@@ -27,20 +27,23 @@ class TimezoneUtil {
     return offsetStr;
   }
 
-  static String timeZoneString(TimeZoneData timeZoneData, TimeZoneShowType timeZoneShowType) {
+  static String timeZoneString(
+      TimeZoneData timeZoneData, TimeZoneShowType timeZoneShowType) {
     String timeZoneStr = "";
     switch (timeZoneShowType) {
       case TimeZoneShowType.name:
         timeZoneStr = timeZoneData.name;
         break;
       case TimeZoneShowType.nameAndOffset:
-        timeZoneStr = "${timeZoneData.name}, UTC${TimezoneUtil.timeOffset2String(timeZoneData.offset)}";
+        timeZoneStr =
+            "${timeZoneData.name}, UTC${TimezoneUtil.timeOffset2String(timeZoneData.offset)}";
         break;
       case TimeZoneShowType.abbreviation:
         timeZoneStr = timeZoneData.abbreviation;
         break;
       case TimeZoneShowType.abbreviationAndOffset:
-        timeZoneStr = "${timeZoneData.abbreviation}, UTC${TimezoneUtil.timeOffset2String(timeZoneData.offset)}";
+        timeZoneStr =
+            "${timeZoneData.abbreviation}, UTC${TimezoneUtil.timeOffset2String(timeZoneData.offset)}";
         break;
     }
     return timeZoneStr;
